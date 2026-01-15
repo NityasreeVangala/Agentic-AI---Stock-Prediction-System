@@ -1,0 +1,180 @@
+Perfect! ✅ This means **Day 5 is fully done** using the **CSV workflow**, and all 5 stocks are now saved as CSVs in your `data/` folder. Let’s go over **exactly what we did on Day 5**, in extreme beginner-friendly detail, step by step.
+
+---
+
+# 🟦 DAY 5 — STORE DATA IN CSV (4 HOURS)
+
+## 🎯 Goal of Day 5
+
+> “Take all the merged NSE + BSE stock data and store it permanently, so we can query it later, compute indicators, or feed it into ML models.”
+
+By the end of Day 5, we have:
+
+* 5 CSV files: `TCS.csv`, `RELIANCE.csv`, `HDFCBANK.csv`, `YESBANK.csv`, `INFY.csv`
+* Each CSV contains **Date + Close_Final**, timezone-aware
+* Data is ready for **technical indicators, prediction, or API serving**
+
+---
+
+# 🕐 Step 1 — Decide storage method
+
+We chose **CSV files** because:
+
+1. Simple for 5 stocks
+2. Easy to debug
+3. No database setup needed
+4. Can later be replaced with DB if needed
+
+We also made a folder:
+
+```
+agentic-stock-ai-11/data/
+```
+
+All CSVs are stored here.
+
+---
+
+# 🕑 Step 2 — Create a `data_saver.py` utility
+
+File: `backend/app/services/data_saver.py`
+
+**Purpose:** Save any merged DataFrame to a CSV automatically.
+
+Code:
+
+```python
+import os
+
+def save_to_csv(df, symbol):
+    # Make 'data/' folder if missing
+    os.makedirs("data", exist_ok=True)
+    
+    # File path
+    file_path = f"data/{symbol}.csv"
+    
+    # Save CSV (overwrite if exists)
+    df.to_csv(file_path, index=False)
+    
+    print(f"[INFO] Saved {symbol} data to {file_path}")
+```
+
+**Why this is important:**
+
+* Automates saving
+* Handles folder creation
+* Ensures filename matches symbol
+
+---
+
+# 🕒 Step 3 — Create `save_data_to_csv.py` test script
+
+File: `backend/tests/save_data_to_csv.py`
+
+**Purpose:** Loop through all 5 stocks, fetch, clean, merge, and save CSV.
+
+Code:
+
+```python
+from app.services.data_fetcher import fetch_stock_data, clean_stock_data
+from app.services.market_merger import merge_nse_bse
+from app.services.data_saver import save_to_csv
+
+# List of 5 stocks
+symbols = ["TCS.NS", "RELIANCE.NS", "HDFCBANK.NS", "YESBANK.NS", "INFY.NS"]
+
+for sym in symbols:
+    # Fetch data
+    nse = fetch_stock_data(sym)
+    bse = fetch_stock_data(sym.replace(".NS", ".BO"))
+    
+    # Clean data
+    nse_clean = clean_stock_data(nse)
+    bse_clean = clean_stock_data(bse)
+    
+    # Merge NSE + BSE
+    merged = merge_nse_bse(nse_clean, bse_clean)
+    
+    # Save CSV
+    save_to_csv(merged, sym.replace(".NS",""))
+```
+
+**Key points:**
+
+* Handles NSE + BSE automatically
+* Saves in a standardized CSV format
+* Prints confirmation for each stock
+
+---
+
+# 🕓 Step 4 — Run the script
+
+From the **backend folder**, run:
+
+```bash
+python tests/save_data_to_csv.py
+```
+
+Console output:
+
+```
+[INFO] Saved TCS data to data/TCS.csv
+[INFO] Saved RELIANCE data to data/RELIANCE.csv
+[INFO] Saved HDFCBANK data to data/HDFCBANK.csv
+[INFO] Saved YESBANK data to data/YESBANK.csv
+[INFO] Saved INFY data to data/INFY.csv
+```
+
+**CSV files created:**
+
+```
+backend/data/TCS.csv
+backend/data/RELIANCE.csv
+backend/data/HDFCBANK.csv
+backend/data/YESBANK.csv
+backend/data/INFY.csv
+```
+
+Each CSV has:
+
+| Date                      | Close_Final |
+| ------------------------- | ----------- |
+| 2010-01-04 00:00:00+05:30 | 267.5513    |
+| 2010-01-05 00:00:00+05:30 | 267.6226    |
+| ...                       | ...         |
+
+---
+
+# 🧠 Step 5 — Key learnings from Day 5
+
+1. **Persistent storage** is essential for any ML/stock system
+2. **CSV is okay for 5 stocks**, but DB would be better for 100+ stocks
+3. **Folder + filename convention** matters for automation
+4. **Scripts should run with correct imports** (we fixed that with Solution 2)
+5. **All merged, cleaned data is now “ground truth”** ready for indicators & predictions
+
+---
+
+# 🟩 Summary of files created / modified on Day 5
+
+```
+backend/app/services/data_saver.py        ← Save DataFrame to CSV
+backend/tests/save_data_to_csv.py         ← Script to fetch, merge, and save 5 stocks
+backend/data/                             ← Folder containing 5 CSV files
+```
+
+No other files were touched.
+
+---
+
+✅ **Outcome:**
+
+* All 5 stock CSVs exist
+* Day 4 merged data is frozen
+* Ready for **Day 6 → computing technical indicators (RSI, MACD, EMA)**
+
+---
+
+If you want, I can now **write Day 6 in extreme beginner-friendly detail**, showing **how to calculate RSI, MACD, EMA directly from these CSVs**, ready for your agent.
+
+Do you want me to do that next?

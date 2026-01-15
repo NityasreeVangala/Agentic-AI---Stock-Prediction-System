@@ -1,0 +1,502 @@
+Perfect.
+**Day 4 is where you touch REAL stock data for the first time** and learn why *data engineering is harder than ML*.
+I’ll explain **slowly, step by step, assuming you are a complete beginner**.
+
+No shortcuts. No magic.
+
+---
+
+# 🟢 DAY 4 (4 HOURS)
+
+## “Fetching & Cleaning Historical Stock Data (Beginner → Real-World)”
+
+---
+
+# ⏱️ TIME BREAKDOWN
+
+| Time      | What you do                                |
+| --------- | ------------------------------------------ |
+| 0:00–0:30 | What “historical stock data” really means  |
+| 0:30–1:15 | Where data comes from (NSE/BSE logic)      |
+| 1:15–2:15 | Fetching historical data (first real code) |
+| 2:15–3:00 | Handling missing dates correctly           |
+| 3:00–4:00 | Aligning NSE & BSE into ONE clean dataset  |
+
+---
+
+# 🔹 PART 1 (0:00–0:30)
+
+## What Is “Historical Stock Data”?
+
+### ❌ Beginner misunderstanding
+
+> “Historical data is just prices from the past.”
+
+### ✅ Reality
+
+Historical stock data is:
+
+> A **time-ordered record of trades**, affected by:
+
+* Market holidays
+* Liquidity
+* Corporate actions
+* Exchange differences
+
+It is **not clean by default**.
+
+---
+
+### What you ultimately want
+
+For EACH stock:
+
+* One row per **trading day**
+* Correct prices
+* No future data beyond **31-12-2025**
+* One **canonical price series**
+
+---
+
+### Key Rule for Today
+
+> **Data correctness > fancy models**
+
+---
+
+# 🔹 PART 2 (0:30–1:15)
+
+## Where Does NSE & BSE Data Come From?
+
+### Important truth
+
+There is **no single perfect free API** for NSE/BSE.
+
+In practice, people use:
+
+* `yfinance` (most common)
+* NSE website downloads
+* Paid data vendors
+
+For learning + portfolio → **yfinance is acceptable**
+
+---
+
+### NSE vs BSE tickers (IMPORTANT)
+
+| Exchange | Example  |
+| -------- | -------- |
+| NSE      | `TCS.NS` |
+| BSE      | `TCS.BO` |
+
+Same company. Different exchange.
+Different liquidity.
+
+---
+
+### What data we fetch
+
+* Date
+* Open
+* High
+* Low
+* Close
+* Volume
+
+(Adjusted close is useful but we’ll control logic ourselves.)
+
+---
+
+# 🔹 PART 3 (1:15–2:15)
+
+## Fetching Historical Data (FIRST REAL CODE)
+
+### Step 1: Install libraries
+
+Update `backend/requirements.txt`:
+
+```text
+fastapi
+uvicorn
+pandas
+yfinance
+```
+
+Install:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### Step 2: Create your FIRST service file
+
+📂 Create this file:
+
+```
+backend/app/services/data_fetcher.py
+```
+
+---
+
+### Step 3: Write beginner-safe code
+
+```python
+import yfinance as yf
+import pandas as pd
+from datetime import datetime
+
+START_DATE = "2010-01-01"
+END_DATE = "2025-12-31"
+
+def fetch_stock_data(symbol: str) -> pd.DataFrame:
+    """
+    Fetch historical stock data from Yahoo Finance.
+    """
+    stock = yf.Ticker(symbol)
+    df = stock.history(start=START_DATE, end=END_DATE)
+
+    # Ensure Date is a column
+    df.reset_index(inplace=True)
+
+    return df
+```
+
+---
+
+### What this code is doing (SLOW EXPLANATION)
+
+* `yf.Ticker(symbol)` → connects to data source
+* `.history()` → downloads historical prices
+* `reset_index()` → turns date index into a column
+
+At this stage:
+❌ Data is NOT clean
+❌ Missing dates exist
+❌ NSE & BSE not aligned
+
+That’s expected.
+
+---
+
+# 🔹 PART 4 (2:15–3:00)
+
+## Handling Missing Dates (VERY IMPORTANT)
+
+### ❌ Beginner mistake
+
+> “Let me fill missing dates with last price.”
+
+This creates **fake data**.
+
+---
+
+### Why dates are missing
+
+* Weekends
+* Holidays
+* No trading occurred
+
+Missing dates ≠ missing information.
+
+---
+
+### Correct approach
+
+* **Accept missing dates**
+* Do NOT forward-fill blindly
+* Use business-day logic only when needed
+
+---
+
+### Add basic sanity checks
+
+Update `data_fetcher.py`:
+
+```python
+def clean_stock_data(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Basic cleaning: sort data and remove empty rows.
+    """
+    df = df.sort_values("Date")
+    df = df.dropna(subset=["Close"])
+    return df
+```
+
+---
+
+### Why this is enough for now
+
+* We’re not training models yet
+* We just want **honest historical data**
+
+---
+
+# 🔹 PART 5 (3:00–4:00)
+
+## Aligning NSE & BSE Data (REAL-WORLD STEP)
+
+### Problem
+
+NSE and BSE:
+
+* Have different volumes
+* Sometimes missing days
+* Slight price differences
+
+We need **one final dataset per company**.
+
+---
+
+### Strategy (Simple & Realistic)
+
+1. Fetch NSE data
+2. Fetch BSE data
+3. Prefer NSE when available
+4. Fall back to BSE if NSE missing
+
+---
+
+### Create merger service
+
+📂 Create file:
+
+```
+backend/app/services/market_merger.py
+```
+
+---
+
+### Code (Beginner Friendly)
+
+```python
+import pandas as pd
+
+def merge_nse_bse(nse_df: pd.DataFrame, bse_df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Merge NSE and BSE data, preferring NSE prices.
+    """
+
+    nse_df["Exchange"] = "NSE"
+    bse_df["Exchange"] = "BSE"
+
+    merged = pd.merge(
+        nse_df,
+        bse_df,
+        on="Date",
+        how="outer",
+        suffixes=("_nse", "_bse")
+    )
+
+    merged["Close_Final"] = merged["Close_nse"].combine_first(
+        merged["Close_bse"]
+    )
+
+    final_df = merged[["Date", "Close_Final"]].sort_values("Date")
+
+    return final_df
+```
+
+---
+
+### What this achieves
+
+* One price per day
+* NSE preferred
+* No cheating
+* No hallucinated values
+
+---
+
+# ✅ DAY 4 OUTPUT (VERY IMPORTANT)
+
+## 📂 Files Created on Day 4
+
+```
+backend/app/services/
+ ├── data_fetcher.py
+ └── market_merger.py
+```
+
+---
+
+## 📊 What “Clean Dataset” Means at Day 4
+
+✔ Sorted by date
+✔ Only real trading days
+✔ No future data beyond 31-12-2025
+✔ One canonical close price
+
+Not perfect — **honest**.
+
+---
+
+# 🧠 DAY 4 FINAL MENTAL MODEL
+
+> “Good stock models don’t start with ML.
+> They start by respecting what data is allowed to say.”
+
+---
+
+# 🔜 DAY 5 PREVIEW
+
+On Day 5 you will:
+
+* Store this clean data in a database
+* Design schemas
+* Make data queryable
+
+If you want, say **“Day 5”** and I’ll continue in the same extreme beginner depth.
+
+
+Good — this tells me **exactly** what’s missing.
+You are **95% correct**, we just need **one small but CRITICAL fix**.
+
+This is a **classic Python packaging issue**, not your fault.
+
+---
+
+# 🔴 WHY IT IS STILL FAILING (ROOT CAUSE)
+
+Python still cannot see `app` because:
+
+👉 **`backend/` itself is NOT a Python package yet**
+
+Python only treats folders as packages if:
+
+* They are on `sys.path`
+* OR they contain `__init__.py`
+* OR you explicitly add them to `PYTHONPATH`
+
+Right now:
+
+```
+backend/
+├── app/        ← package
+│   ├── __init__.py
+├── tests/
+```
+
+But **`backend/` itself is invisible** to Python.
+
+---
+
+# ✅ THE CORRECT FIX (DO THIS EXACTLY)
+
+## ✅ Step 1: CREATE `backend/__init__.py`
+
+Create an **empty file** here:
+
+```
+backend/
+├── __init__.py   ✅ THIS IS THE MISSING PIECE
+├── app/
+│   ├── __init__.py
+├── tests/
+```
+
+👉 This tells Python:
+
+> “`backend` is a real package root”
+
+---
+
+## ✅ Step 2: UPDATE IMPORTS (VERY IMPORTANT)
+
+Now change your import in
+`backend/tests/test_data_fetch.py` ⬇️
+
+### ❌ WRONG (old)
+
+```python
+from app.services.data_fetcher import fetch_stock_data
+```
+
+### ✅ CORRECT (after fix)
+
+```python
+from backend.app.services.data_fetcher import fetch_stock_data, clean_stock_data
+from backend.app.services.market_merger import merge_nse_bse
+```
+
+---
+
+## ✅ Step 3: RUN FROM PROJECT ROOT (NOT backend)
+
+Now go back to **project root**:
+
+```bash
+cd C:\Users\nitya\OneDrive\Desktop\agentic-stock-ai-11
+python -m backend.tests.test_data_fetch
+```
+
+⚠️ **IMPORTANT**
+
+* Use `-m`
+* Do NOT run the file directly
+
+---
+
+# 🧠 WHY THIS WORKS (BEGINNER EXPLANATION)
+
+When you do:
+
+```bash
+python -m backend.tests.test_data_fetch
+```
+
+Python:
+
+1. Treats `backend` as a package
+2. Loads `backend/__init__.py`
+3. Resolves `backend.app.services...` correctly
+
+This is the **correct professional way**.
+
+---
+
+# ✅ EXPECTED RESULT AFTER FIX
+
+You should now see output like:
+
+```
+NSE rows: 3800
+BSE rows: 3600
+Merged rows: 3800
+
+Sample data:
+         Date        Open        High        Low        Close
+0  2010-01-04   736.00     749.50      733.00     747.50
+
+Last date: 2025-12-31
+```
+
+🎉 **DAY 4 DATA PIPELINE IS NOW WORKING**
+
+---
+
+# 🚫 DO NOT DO THESE
+
+❌ Don’t randomly add sys.path hacks
+❌ Don’t move tests inside app
+❌ Don’t rename folders
+
+You’re building this **like a real backend**, not a notebook mess.
+
+---
+
+# ✅ FINAL CHECKLIST (DAY 4 COMPLETE)
+
+✔ Historical data fetched
+✔ NSE + BSE aligned
+✔ Missing dates handled
+✔ Verified manually
+✔ Proper Python packaging
+
+---
+
+If you want, next we go to
+
+### **Day 5: Database schema (PostgreSQL like a hedge fund)** 💣
+

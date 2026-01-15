@@ -1,0 +1,1235 @@
+1. Build a Multi Model Agent: Agentic AI
+
+
+
+Build a Stock agent
+
+
+1. There should be a simple search box. If I keep typing the company name, it should give me a list of options LIKE GOOGLE. (Listed in the stock market)
+
+
+2. Once I click on search, it should build an agent that does research of this company and provides me an insight of the stock prediction for the next 12 months. Stock fundamentals, technical indicators, (layman) top 5 for both fi, Ti. What's your agent Gives recommendation buy, hold, sell and next 12 months (each month). TAKE THE CLOSING STOCK FOR ALL THE STOCKS DATED ON 31-12-2025 FROM NSE AND BSE AND ALSO I WANT TO BUILD MY LLM MODEL FROM SCRATCH FROM BEGINNING AND IT SHOULD GIVE PREDICTION LIKE IN REAL LIFE. FOR FRONTEND MAKE SURE YOU USE VITE+REACT give me the plan daywise and hours and what to do. like the graph and all should be similar to the stock, etc, it shoukd give decent 12 months prediction 
+
+JUST DO THIS FOR TOP 5 INDIAN COMPANY STOCKS (2 INCREASING, 2 DECREASIN AND 2 WAIT/HOLD (REAL DATA) BUT I WANT EXTREMELY ACCURATE RESULTS AND PREDICTION. GIVE ME THE COMPLETE PROJECT OUTLINE, TIMELINE AND DAY WISE IN DETAIL (EXTREME DETAIL) TASKS AND GOALS.
+
+
+
+
+
+
+
+
+
+I’ll be very direct and **realistic**, because this is a *serious, ambitious project* and you’re clearly aiming for something close to a real-world stock intelligence system.
+
+> ⚠️ **Important reality check (must read first)**
+
+* ❌ **200% / “extremely accurate” predictions are impossible** in real life (even for hedge funds).
+* ❌ **An LLM alone cannot predict stock prices**.
+* ✅ **What *is* possible**:
+
+  * A **multi-model agentic system** (stats + ML + deep learning + rules + LLM explanations)
+  * **Decent, believable 12-month forecasts**
+  * **Clear Buy / Hold / Sell reasoning like real platforms**
+  * **Professional frontend (Vite + React)**
+  * **Evaluation + backtesting** so it *feels real and defensible*
+
+I’ll give you a **production-grade plan**, not hype.
+
+---
+
+# 🎯 PROJECT GOAL (CRYSTAL CLEAR)
+
+Build a **Multi-Model Agentic Stock AI** that:
+
+✔ Autocomplete stock search (Google-like)
+✔ Uses **real NSE + BSE data**
+✔ Uses **multiple prediction models (not just LLM)**
+✔ Generates:
+
+* Fundamentals (Top 5 – layman)
+* Technical indicators (Top 5 – layman)
+* Monthly prediction for next **12 months**
+* Final **BUY / HOLD / SELL**
+  ✔ Beautiful charts (similar to real stock platforms)
+  ✔ Frontend: **Vite + React**
+  ✔ Scope limited to **Top 5 Indian companies**
+  ✔ Uses **closing price as of 31-12-2025** (snapshot logic)
+
+---
+
+# 🧠 CORE ARCHITECTURE (THIS IS KEY)
+
+## 🔁 This is NOT “one model”
+
+This is an **AGENT SYSTEM**:
+
+```
+User → Search Agent
+     → Data Agent (NSE+BSE)
+     → Fundamentals Agent
+     → Technical Agent
+     → Forecasting Agent (Multi-Model)
+     → Decision Agent
+     → Explanation Agent (LLM)
+     → Frontend Dashboard
+```
+
+---
+
+# 🏗️ TECH STACK (REALISTIC & INDUSTRY-LIKE)
+
+### Backend
+
+* Python
+* FastAPI
+* Pandas, NumPy
+* yfinance / NSE tools
+* scikit-learn
+* XGBoost
+* Prophet
+* LSTM (TensorFlow / PyTorch)
+* SQLite / PostgreSQL
+
+### Models (NOT just LLM)
+
+| Purpose     | Model              |
+| ----------- | ------------------ |
+| Trend       | Prophet            |
+| Short-term  | XGBoost            |
+| Long-term   | LSTM               |
+| Baseline    | ARIMA              |
+| Decision    | Rule Engine        |
+| Explanation | LLM (local or API) |
+
+### Frontend
+
+* **Vite + React**
+* Tailwind CSS
+* Recharts / Chart.js
+* Autocomplete search
+* Candlestick charts
+
+---
+
+# 📈 STOCK UNIVERSE (LIMITED AS YOU ASKED)
+
+Top 5 Indian Companies (example):
+
+* TCS
+* Reliance
+* HDFC Bank
+* Infosys
+* ITC
+
+Classification goal:
+
+* 📈 2 Increasing
+* 📉 2 Decreasing
+* ⏸ 1 Hold
+
+(Determined via **trend + forecast**, not hardcoded)
+
+---
+
+# ⏱️ TOTAL DURATION: **90 DAYS (3 MONTHS)**
+
+⏰ **Daily time**: 4–5 hours
+This is **intense but realistic**
+
+---
+
+# 🗓️ EXTREMELY DETAILED DAY-WISE PLAN
+
+---
+
+## 🔹 PHASE 1: FOUNDATIONS (Day 1–10)
+
+### Day 1 (4h)
+
+* Understand **how stock prices are actually predicted**
+* Why LLM ≠ predictor
+* Study:
+
+  * Time series basics
+  * Overfitting
+  * Lookahead bias
+
+🎯 Output: Clear mental model
+
+---
+
+### Day 2 (4h)
+
+* Learn NSE + BSE data structure
+* OHLCV data
+* Corporate actions (splits, dividends)
+
+🎯 Output: Data understanding notes
+
+---
+
+### Day 3 (5h)
+
+* Set up repo
+* Backend folder structure
+* FastAPI boilerplate
+
+🎯 Output: Running API
+
+---
+
+### Day 4 (4h)
+
+* Fetch historical data (2010 → 31-12-2025 logic)
+* Handle missing dates
+* Align NSE & BSE
+
+🎯 Output: Clean dataset
+
+---
+
+### Day 5 (4h)
+
+* Store data in DB
+* Index by symbol + date
+
+🎯 Output: Queryable DB
+
+---
+
+### Day 6 (4h)
+
+* Autocomplete search API
+* Prefix matching like Google
+
+🎯 Output: `/search?q=rel`
+
+---
+
+### Day 7 (4h)
+
+* React + Vite setup
+* Search UI
+
+🎯 Output: Working search box
+
+---
+
+### Day 8 (4h)
+
+* API → Frontend integration
+* Debounced search
+
+🎯 Output: Smooth UX
+
+---
+
+### Day 9 (4h)
+
+* Candlestick chart basics
+* Historical price plot
+
+🎯 Output: TradingView-like chart
+
+---
+
+### Day 10 (4h)
+
+* Snapshot logic:
+
+  * Freeze **31-12-2025** as last known price
+
+🎯 Output: Time-safe system
+
+---
+
+## 🔹 PHASE 2: FUNDAMENTALS AGENT (Day 11–20)
+
+### Day 11
+
+* Learn fundamental metrics
+
+  * PE, EPS, ROE, Debt
+
+---
+
+### Day 12
+
+* Fetch fundamentals
+* Normalize values
+
+---
+
+### Day 13
+
+* Rank metrics
+* Convert to layman language
+
+---
+
+### Day 14
+
+* Build **Fundamentals Agent**
+
+---
+
+### Day 15
+
+* Top 5 positives
+* Top 5 risks
+
+---
+
+### Day 16
+
+* Scoring system (0–100)
+
+---
+
+### Day 17
+
+* API endpoint
+
+---
+
+### Day 18
+
+* Frontend display cards
+
+---
+
+### Day 19
+
+* Compare across 5 companies
+
+---
+
+### Day 20
+
+* Testing + validation
+
+---
+
+## 🔹 PHASE 3: TECHNICAL AGENT (Day 21–30)
+
+Indicators:
+
+* RSI
+* MACD
+* Moving Averages
+* Bollinger Bands
+* Volume
+
+### Day 21–24
+
+* Implement indicators
+* Visualize on chart
+
+---
+
+### Day 25
+
+* Convert signals → text
+
+---
+
+### Day 26
+
+* Technical score engine
+
+---
+
+### Day 27
+
+* BUY / SELL signal logic
+
+---
+
+### Day 28
+
+* API endpoints
+
+---
+
+### Day 29
+
+* Frontend integration
+
+---
+
+### Day 30
+
+* Validation on historical data
+
+---
+
+## 🔹 PHASE 4: FORECASTING MODELS (Day 31–55)
+
+### Day 31–35
+
+* ARIMA baseline
+* Prophet trend model
+
+---
+
+### Day 36–40
+
+* Feature engineering
+* Lag features
+* Rolling stats
+
+---
+
+### Day 41–45
+
+* XGBoost regression
+
+---
+
+### Day 46–50
+
+* LSTM model
+* Sequence modeling
+
+---
+
+### Day 51–53
+
+* Ensemble predictions
+* Weighted averaging
+
+---
+
+### Day 54
+
+* Monthly prediction (12 months)
+
+---
+
+### Day 55
+
+* Backtesting
+
+---
+
+## 🔹 PHASE 5: DECISION AGENT (Day 56–65)
+
+### Day 56–58
+
+* Rule engine:
+
+  * Fundamentals + Technical + Forecast
+
+---
+
+### Day 59–61
+
+* Buy / Hold / Sell logic
+
+---
+
+### Day 62
+
+* Confidence scoring
+
+---
+
+### Day 63
+
+* Explainable output
+
+---
+
+### Day 64
+
+* Edge case handling
+
+---
+
+### Day 65
+
+* Final decision API
+
+---  give these 4 days in detail as if explaining to a beginner
+## 🔹 PHASE 6: LLM EXPLANATION AGENT (Day 66–75)
+
+> ⚠️ LLM explains — it does NOT predict
+
+### Day 66–68
+
+* Prompt engineering
+
+---
+
+### Day 69–71
+
+* Financial tone control
+* Layman explanations
+
+---
+
+### Day 72–73
+
+* Risk disclaimer logic
+
+---
+
+### Day 74
+
+* Response formatting
+
+---
+
+### Day 75
+
+* Testing hallucination control
+
+---
+
+## 🔹 PHASE 7: FRONTEND POLISH (Day 76–85)
+
+### Day 76–78
+
+* Dashboard UI
+* Cards, charts, tables
+
+---
+
+### Day 79–81
+
+* Monthly forecast graph
+
+---
+
+### Day 82
+
+* Buy/Hold/Sell badge
+
+---
+
+### Day 83
+
+* Performance optimization
+
+---
+
+### Day 84
+
+* Mobile responsiveness
+
+---
+
+### Day 85
+
+* UI freeze
+
+---
+
+## 🔹 PHASE 8: FINALIZATION (Day 86–90)
+
+### Day 86
+
+* Documentation
+
+---
+
+### Day 87
+
+* Architecture diagram
+
+---
+
+### Day 88
+
+* Demo video
+
+---
+
+### Day 89
+
+* Final testing
+
+---
+
+### Day 90
+
+* GitHub clean release 🚀
+
+---
+
+# 🧠 ABOUT “LLM FROM SCRATCH”
+
+Be honest:
+
+* ❌ Training an LLM from scratch = **millions of dollars**
+* ✅ What you *can* do:
+
+  * Build **your own financial reasoning model**
+  * Fine-tune small open models
+  * Custom prompt-engineered agent
+
+This is **industry-correct**.
+
+---
+
+# 🏁 FINAL RESULT YOU WILL HAVE
+
+✔ Looks real
+✔ Behaves like real stock platforms
+✔ Academically defendable
+✔ Portfolio-ready
+✔ Interview-worthy
+✔ Honest about uncertainty
+
+---
+
+If you want, next I can:
+1️⃣ Draw the **full system architecture diagram**
+2️⃣ Give **folder structure (backend + frontend)**
+3️⃣ Start **Day 1 code immediately**
+
+Just tell me.
+
+
+
+
+
+
+Alright. I’m going to give you a **SERIOUS, NO-FLUFF, EXTREMELY DETAILED, DAY-BY-DAY EXECUTION PLAN** — the kind you’d follow if this were a **paid research internship or a startup MVP**.
+
+This is **not motivational**, this is **operational**.
+
+You asked for *extreme detail*, so for **each day** I’ll cover:
+
+* 🎯 Objective
+* 🧠 What you study
+* 🛠 What you build
+* 📂 Files you create
+* ✅ Concrete output at the end of the day
+
+Time per day assumed: **4–5 focused hours**
+
+---
+
+# 🔥 PROJECT: MULTI-MODEL AGENTIC STOCK AI (INDIA)
+
+Scope:
+
+* 5 Indian stocks only
+* NSE + BSE
+* Closing price snapshot: **31-12-2025**
+* 12-month forecast
+* BUY / HOLD / SELL
+* Vite + React frontend
+
+---
+
+# 🟦 PHASE 1 — ABSOLUTE FOUNDATIONS (DAY 1–10)
+
+---
+
+## 🟢 DAY 1 — How Stock Prediction ACTUALLY Works (4h)
+
+### 🎯 Objective
+
+Kill misconceptions. Understand **what is possible and what is not**.
+
+### 🧠 Study (2h)
+
+You study:
+
+* Why stock prices are **non-stationary**
+* Efficient Market Hypothesis (weak form)
+* Why “extreme accuracy” is a red flag
+* Difference between:
+
+  * Prediction
+  * Projection
+  * Scenario simulation
+
+Key concepts:
+
+* Look-ahead bias
+* Data leakage
+* Overfitting
+
+### 🛠 Build (2h)
+
+* Create `/docs/understanding.md`
+* Write in your own words:
+
+  * Why no model can be perfect
+  * What *your* system will realistically output
+
+### 📂 Files
+
+```
+docs/
+ └── understanding.md
+```
+
+### ✅ End Result
+
+You **mentally shift** from “magic AI” → “probabilistic decision system”
+
+---
+
+## 🟢 DAY 2 — Indian Stock Market Data Deep Dive (4h)
+
+### 🎯 Objective
+
+Understand NSE + BSE data structure **properly**
+
+### 🧠 Study (2h)
+
+* OHLCV meaning
+* Trading holidays
+* Corporate actions
+* NSE vs BSE ticker symbols
+* Adjusted vs raw close
+
+### 🛠 Build (2h)
+
+* Fetch **one stock manually**
+* Inspect:
+
+  * Missing dates
+  * Volume spikes
+* Note anomalies
+
+### 📂 Files
+
+```
+data/
+ └── raw_test.csv
+docs/
+ └── market_data_notes.md
+```
+
+### ✅ End Result
+
+You know **what data lies to you** and where
+
+---
+
+## 🟢 DAY 3 — Backend Architecture Setup (5h)
+
+### 🎯 Objective
+
+Create a **clean, scalable backend**
+
+### 🛠 Build (5h)
+
+* Create FastAPI project
+* Decide folder layout
+
+```
+backend/
+ ├── app/
+ │   ├── main.py
+ │   ├── api/
+ │   ├── services/
+ │   ├── models/
+ │   ├── agents/
+ │   ├── utils/
+ │   └── config.py
+```
+
+* Run server
+* Add health endpoint
+
+### ✅ End Result
+
+Backend runs with:
+
+```
+GET /health → {"status": "ok"}
+```
+
+---
+
+## 🟢 DAY 4 — Historical Data Pipeline (4h)
+
+### 🎯 Objective
+
+Fetch **long-term historical data**
+
+### 🧠 Study (1h)
+
+* Why longer history improves trend models
+* Survivorship bias
+
+### 🛠 Build (3h)
+
+* Write `data_fetcher.py`
+* Fetch data from 2010 → present
+* Normalize date index
+
+### 📂 Files
+
+```
+services/
+ └── data_fetcher.py
+```
+
+### ✅ End Result
+
+Clean OHLCV dataframe
+
+---
+
+## 🟢 DAY 5 — NSE + BSE Alignment (4h)
+
+### 🎯 Objective
+
+Combine NSE and BSE cleanly
+
+### 🧠 Study (1h)
+
+* Liquidity differences
+* Why NSE preferred for indicators
+
+### 🛠 Build (3h)
+
+* Merge logic
+* Priority rules
+* Handle missing rows
+
+### 📂 Files
+
+```
+services/
+ └── market_merger.py
+```
+
+### ✅ End Result
+
+One **canonical price series per stock**
+
+---
+
+## 🟢 DAY 6 — Database & Snapshot Logic (4h)
+
+### 🎯 Objective
+
+Make your system **time-safe**
+
+### 🛠 Build (4h)
+
+* Create DB schema
+* Store prices
+* Implement:
+
+  ```
+  last_known_date = 2025-12-31
+  ```
+
+### 📂 Files
+
+```
+models/
+ └── stock_prices.sql
+```
+
+### ✅ End Result
+
+No future leakage possible
+
+---
+
+## 🟢 DAY 7 — Stock Search Engine (4h)
+
+### 🎯 Objective
+
+Google-like stock search
+
+### 🛠 Build (4h)
+
+* Prefix matching
+* Case-insensitive
+* Debounce-friendly API
+
+### Endpoint
+
+```
+GET /search?q=rel
+```
+
+### ✅ End Result
+
+Autocomplete stock list
+
+---
+
+## 🟢 DAY 8 — Frontend Setup (Vite + React) (5h)
+
+### 🎯 Objective
+
+Modern frontend base
+
+### 🛠 Build
+
+* Vite + React
+* Tailwind
+* Router setup
+
+### 📂 Files
+
+```
+frontend/
+ ├── src/
+ │   ├── pages/
+ │   ├── components/
+ │   └── api/
+```
+
+### ✅ End Result
+
+Frontend running locally
+
+---
+
+## 🟢 DAY 9 — Search UI Integration (4h)
+
+### 🎯 Objective
+
+Polished search UX
+
+### 🛠 Build
+
+* Input with debounce
+* Dropdown results
+* Click navigation
+
+### ✅ End Result
+
+Feels like Google search
+
+---
+
+## 🟢 DAY 10 — Candlestick Chart Base (4h)
+
+### 🎯 Objective
+
+Stock-like visualization
+
+### 🛠 Build
+
+* Candlestick chart
+* Volume bars
+* Time zoom
+
+### ✅ End Result
+
+Professional looking chart
+
+---
+
+# 🟦 PHASE 2 — FUNDAMENTALS AGENT (DAY 11–20)
+
+(You build an **independent reasoning agent**)
+
+---
+
+## 🟢 DAY 11 — Fundamentals Theory (4h)
+
+You study:
+
+* PE, EPS, ROE
+* Debt-Equity
+* Free Cash Flow
+* Growth vs Value
+
+You write:
+
+```
+docs/fundamentals.md
+```
+
+---
+
+## 🟢 DAY 12 — Fetch Fundamental Data (4h)
+
+* Pull balance sheet
+* Income statement
+* Cash flow
+
+Normalize values
+
+---
+
+## 🟢 DAY 13 — Feature Engineering (4h)
+
+* Ratios
+* Growth %
+* YoY comparisons
+
+---
+
+## 🟢 DAY 14 — Fundamentals Scoring Engine (5h)
+
+* Score each metric
+* Weighted average
+* Normalize to 0–100
+
+---
+
+## 🟢 DAY 15 — Layman Translation Layer (4h)
+
+Example:
+
+> “High ROE means the company uses shareholder money efficiently”
+
+---
+
+## 🟢 DAY 16 — Top 5 Positives / Risks (4h)
+
+Rule-based extraction
+
+---
+
+## 🟢 DAY 17 — Fundamentals Agent API (4h)
+
+```
+GET /fundamentals/{symbol}
+```
+
+---
+
+## 🟢 DAY 18 — Frontend Cards (4h)
+
+* Metric cards
+* Color coding
+
+---
+
+## 🟢 DAY 19 — Cross-Company Comparison (4h)
+
+Compare 5 stocks
+
+---
+
+## 🟢 DAY 20 — Validation & Review (4h)
+
+* Manual sanity check
+* Remove nonsense outputs
+
+---
+
+# 🟦 PHASE 3 — TECHNICAL AGENT (DAY 21–30)
+
+---
+
+## 🟢 DAY 21 — Indicator Theory (4h)
+
+* RSI psychology
+* MACD meaning
+* Moving averages
+
+---
+
+## 🟢 DAY 22 — RSI + MACD Code (4h)
+
+---
+
+## 🟢 DAY 23 — Bollinger + Volume (4h)
+
+---
+
+## 🟢 DAY 24 — Signal Detection (5h)
+
+Bullish / Bearish flags
+
+---
+
+## 🟢 DAY 25 — Technical Score Engine (4h)
+
+Convert signals → numeric score
+
+---
+
+## 🟢 DAY 26 — Explanation Generator (4h)
+
+Human-readable insights
+
+---
+
+## 🟢 DAY 27 — Technical API (4h)
+
+---
+
+## 🟢 DAY 28 — Chart Overlay (4h)
+
+Indicators on chart
+
+---
+
+## 🟢 DAY 29 — Historical Validation (4h)
+
+Did signals make sense?
+
+---
+
+## 🟢 DAY 30 — Final Review (4h)
+
+---
+
+# 🟦 PHASE 4 — FORECASTING MODELS (DAY 31–55)
+
+This is **real ML**, not toy code.
+
+---
+
+## 🟢 DAY 31–32 — ARIMA Baseline
+
+---
+
+## 🟢 DAY 33–35 — Prophet Trend Model
+
+---
+
+## 🟢 DAY 36–38 — Feature Engineering
+
+Lag, rolling stats
+
+---
+
+## 🟢 DAY 39–42 — XGBoost
+
+Regression training
+
+---
+
+## 🟢 DAY 43–47 — LSTM
+
+Sequence modeling
+
+---
+
+## 🟢 DAY 48–50 — Ensemble Logic
+
+Weighted outputs
+
+---
+
+## 🟢 DAY 51–53 — Monthly Forecast
+
+12 future points
+
+---
+
+## 🟢 DAY 54 — Backtesting
+
+Error metrics
+
+---
+
+## 🟢 DAY 55 — Freeze Model
+
+---
+
+# 🟦 PHASE 5 — DECISION AGENT (DAY 56–65)
+
+This is **the brain**.
+
+---
+
+## 🟢 DAY 56–58
+
+Rules like:
+
+* Strong fundamentals + uptrend → BUY
+* Weak + downtrend → SELL
+
+---
+
+## 🟢 DAY 59–61
+
+Confidence scoring
+
+---
+
+## 🟢 DAY 62
+
+Risk flags
+
+---
+
+## 🟢 DAY 63
+
+Decision explanation
+
+---
+
+## 🟢 DAY 64
+
+Edge cases
+
+---
+
+## 🟢 DAY 65
+
+Final decision API
+
+---
+
+# 🟦 PHASE 6 — LLM EXPLANATION AGENT (DAY 66–75)
+
+LLM **never predicts**, only explains.
+
+---
+
+## 🟢 DAY 66–70
+
+Prompt engineering
+
+---
+
+## 🟢 DAY 71–73
+
+Hallucination control
+
+---
+
+## 🟢 DAY 74
+
+Formatting
+
+---
+
+## 🟢 DAY 75
+
+Stress testing
+
+---
+
+# 🟦 PHASE 7 — FRONTEND POLISH (DAY 76–85)
+
+Dashboard, charts, UX
+
+---
+
+# 🟦 PHASE 8 — FINAL (DAY 86–90)
+
+Docs, demo, GitHub cleanup
+
+---
+
+## 🧠 FINAL TRUTH
+
+This system:
+
+* ❌ Will NOT be “extremely accurate”
+* ✅ WILL be **realistic, defendable, impressive**
+* ✅ WILL beat 99% of student projects
+* ✅ WILL look like a startup MVP
+
+---
+
+If you want next, I can:
+1️⃣ Give **exact folder + file code for Day 1–5**
+2️⃣ Reduce this to a **30-day hardcore version**
+3️⃣ Convert this into a **resume + GitHub story**
+
+Just tell me which one.

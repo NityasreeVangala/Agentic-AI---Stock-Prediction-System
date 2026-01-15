@@ -1,0 +1,360 @@
+Perfect.
+Day 2 is where you **touch real market data for the first time** — and this is usually where beginners get confused and silently make mistakes that destroy models later.
+
+I will explain **slowly, visually, and practically**, assuming **zero prior market experience**.
+
+---
+
+# 🟢 DAY 2 (4 HOURS)
+
+## “Understanding NSE + BSE Market Data (Beginner → Real-World)”
+
+---
+
+# ⏱️ TIME BREAKDOWN
+
+| Time      | Focus                                |
+| --------- | ------------------------------------ |
+| 0:00–0:40 | What NSE & BSE actually are          |
+| 0:40–1:30 | OHLCV explained line-by-line         |
+| 1:30–2:15 | Trading days & missing data          |
+| 2:15–3:00 | Corporate actions (splits/dividends) |
+| 3:00–4:00 | Reading raw data + notes file        |
+
+---
+
+# 🔹 PART 1 (0:00–0:40)
+
+## What Are NSE and BSE — Really?
+
+### ❌ Beginner misunderstanding
+
+> “NSE and BSE are companies that tell stock prices.”
+
+### ✅ Reality
+
+NSE and BSE are:
+
+> **Exchanges** — marketplaces where buyers and sellers meet.
+
+They do **not** decide prices.
+They only **record trades**.
+
+---
+
+### Why India has two exchanges
+
+* **BSE** → older, more stocks
+* **NSE** → higher liquidity, faster trading
+
+Most analytics use **NSE data** for indicators
+But BSE is useful for **cross-checking**
+
+---
+
+### Important mental note
+
+> Same company ≠ same price always (NSE vs BSE)
+
+Differences happen due to:
+
+* Liquidity
+* Timing
+* Volume
+
+---
+
+# 🔹 PART 2 (0:40–1:30)
+
+## OHLCV — Explained Like You’ve Never Seen It
+
+Every row in stock data represents **one trading day**.
+
+Let’s take an example row:
+
+```
+Date        Open    High    Low     Close   Volume
+2024-01-02  2450    2480    2430    2475    3,200,000
+```
+
+---
+
+## 🧠 What each column REALLY means
+
+### 🔸 Open
+
+> Price of **first trade** of the day
+> Not yesterday’s close
+
+---
+
+### 🔸 High
+
+> Highest price **anyone was willing to pay** that day
+
+---
+
+### 🔸 Low
+
+> Lowest price **anyone accepted to sell** that day
+
+---
+
+### 🔸 Close ⭐ (MOST IMPORTANT)
+
+> Price of **last trade of the day**
+
+📌 Why close price matters:
+
+* Institutions evaluate on close
+* Indicators are calculated on close
+* You use **close price for prediction**
+
+---
+
+### 🔸 Volume
+
+> Number of shares traded that day
+
+High volume = strong conviction
+Low volume = weak movement
+
+---
+
+### Key Insight #1
+
+> Price movement without volume is suspicious.
+
+---
+
+# 🔹 PART 3 (1:30–2:15)
+
+## Trading Days, Holidays & Missing Dates
+
+### ❌ Beginner mistake
+
+> “Why are dates missing? Is my data broken?”
+
+### ✅ Reality
+
+Markets:
+
+* Don’t trade on weekends
+* Don’t trade on holidays
+* Stop during extreme events
+
+---
+
+### Example
+
+If Friday is 5 Jan
+Next row might be 8 Jan (Monday)
+
+That is **normal**
+
+---
+
+### Why this matters for ML
+
+Models assume:
+
+> Equal time steps
+
+But stock data:
+
+> Has irregular gaps
+
+---
+
+### Your rule
+
+* **Never forward-fill prices blindly**
+* Use business-day aware logic
+
+---
+
+### Key Insight #2
+
+> Missing dates ≠ missing data
+
+---
+
+# 🔹 PART 4 (2:15–3:00)
+
+## Corporate Actions (THIS IS WHERE MOST PEOPLE FAIL)
+
+Corporate actions **change price without changing value**.
+
+---
+
+## 🔥 Stock Split (Very Important)
+
+### Example
+
+Before split:
+
+* Price = ₹1000
+* Shares = 1
+
+2:1 Split:
+
+* Price becomes ₹500
+* Shares become 2
+
+Your money stays same.
+
+---
+
+### What happens to data?
+
+If you don’t adjust:
+
+* Price suddenly drops 50%
+* Model thinks company crashed
+
+---
+
+### Solution
+
+Use **adjusted prices**
+
+---
+
+## 🔥 Dividends
+
+When company pays dividend:
+
+* Price drops on ex-dividend date
+* Not because company is weak
+
+---
+
+### Example
+
+* Price: ₹100
+* Dividend: ₹5
+* New price ≈ ₹95
+
+---
+
+### Beginner trap
+
+Model thinks:
+
+> “Big drop = bearish signal”
+
+But it’s not.
+
+---
+
+### Key Insight #3
+
+> Corporate actions create **fake volatility**.
+
+---
+
+# 🔹 PART 5 (3:00–4:00)
+
+## Touching Real Data (Without Coding Yet)
+
+### What you do now
+
+* Download **one CSV** (any stock)
+* Open in Excel / Google Sheets
+
+---
+
+### Observe:
+
+* Are dates continuous?
+* Is volume sometimes zero?
+* Are there sudden price jumps?
+
+---
+
+### Ask these questions:
+
+1. Is this a split or real crash?
+2. Was there news?
+3. Was volume high?
+
+---
+
+### Write notes — NOT CODE
+
+---
+
+# 📄 DAY 2 OUTPUT FILE (MANDATORY)
+
+## 📂 Files Created on Day 2
+
+```
+docs/
+ └── day2_market_data_notes.md
+```
+
+---
+
+## 📝 What goes inside `day2_market_data_notes.md`
+
+### Section 1 — NSE vs BSE
+
+* What they are
+* Why NSE preferred
+* Why both matter
+
+---
+
+### Section 2 — OHLCV Meaning
+
+Explain in your own words:
+
+* Open
+* High
+* Low
+* Close
+* Volume
+
+---
+
+### Section 3 — Trading Days
+
+* Why weekends missing
+* Why this is not an error
+
+---
+
+### Section 4 — Corporate Actions
+
+* What splits are
+* What dividends are
+* Why adjusted prices matter
+
+---
+
+### Section 5 — Mistakes to Avoid
+
+* Using raw close blindly
+* Ignoring splits
+* Treating dividends as crashes
+
+---
+
+# 🧠 FINAL DAY-2 MENTAL MODEL
+
+> “Market data is messy because reality is messy.
+> Prices move for technical reasons that models must not misinterpret.”
+
+---
+
+# 🔜 DAY 3 PREVIEW
+
+Day 3 is where you:
+
+* Touch Python
+* Build backend skeleton
+* Write your **first real stock service**
+
+If you want, I can do **Day 3 in the same extreme depth** and list **every file created**.
+
+Just say **“Day 3”**.

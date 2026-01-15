@@ -1,0 +1,245 @@
+Perfect! Now that your **Day 7 backend + frontend setup** is fully working, let’s summarize **everything we did on Day 7 in extreme detail** for a beginner. I’ll break it into tasks, files, why we did them, and the expected output.
+
+---
+
+# 🟦 DAY 7 – REACT + VITE SETUP & SEARCH UI (4 HOURS)
+
+## 🎯 Goal
+
+> Build a **frontend** with React + Vite where the user can type a company name and get **autocomplete suggestions** from the backend `/search` API in real time.
+
+* Type `rel` → sees `RELIANCE.NS`
+* Click on suggestion → updates selected stock
+
+We also ensure **CORS is enabled** so frontend can communicate with backend.
+
+---
+
+## 🕐 Step 1 – Setup React + Vite project
+
+**Commands run:**
+
+```bash
+mkdir frontend
+cd frontend
+npm create vite@latest .
+# Select React + JavaScript (or TypeScript)
+npm install
+npm install axios
+```
+
+**Why:**
+
+* Vite is a fast React bundler (dev server + hot reload)
+* Axios allows **HTTP requests** from React to backend
+
+**Result:**
+
+* `frontend/` folder created
+* Ready-to-start React project
+
+---
+
+## 🕑 Step 2 – Frontend folder structure
+
+```
+frontend/
+├── index.html          # main HTML template
+├── package.json        # project dependencies
+├── src/
+│   ├── main.jsx        # React entry point
+│   ├── App.jsx         # Main app component
+│   └── components/
+│       └── SearchBox.jsx  # Search box component (new)
+```
+
+**Why:**
+
+* Keep components organized
+* `SearchBox.jsx` is reusable
+
+---
+
+## 🕒 Step 3 – Create SearchBox.jsx
+
+**File:** `frontend/src/components/SearchBox.jsx`
+
+**Content:**
+
+```jsx
+import React, { useState } from "react";
+import axios from "axios";
+
+const SearchBox = ({ onSelect }) => {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
+  const handleChange = async (e) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    if (!value) {
+      setResults([]);
+      return;
+    }
+
+    try {
+      const res = await axios.get(`http://127.0.0.1:8000/search?q=${value}`);
+      setResults(res.data.results);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={query}
+        onChange={handleChange}
+        placeholder="Search stock..."
+        className="border p-2 rounded w-full"
+      />
+      <ul className="border mt-1 rounded max-h-40 overflow-y-auto">
+        {results.map((item) => (
+          <li
+            key={item}
+            onClick={() => onSelect(item)}
+            className="p-2 hover:bg-gray-200 cursor-pointer"
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default SearchBox;
+```
+
+**What we did:**
+
+1. `useState` stores **typed query** and **results**
+2. `handleChange` → called on every keystroke
+
+   * Calls `/search?q=...` API
+   * Updates results dynamically
+3. Renders `<input>` + `<ul>` for **autocomplete dropdown**
+4. Click on suggestion calls `onSelect`
+
+**Output:** Typing in the box fetches suggestions from backend
+
+---
+
+## 🕓 Step 4 – Integrate SearchBox in App.jsx
+
+**File:** `frontend/src/App.jsx`
+
+```jsx
+import React, { useState } from "react";
+import SearchBox from "./components/SearchBox";
+
+function App() {
+  const [selectedStock, setSelectedStock] = useState("");
+
+  return (
+    <div className="max-w-md mx-auto mt-10">
+      <h1 className="text-2xl font-bold mb-4">Agentic Stock AI</h1>
+      <SearchBox onSelect={setSelectedStock} />
+      {selectedStock && (
+        <p className="mt-4">You selected: {selectedStock}</p>
+      )}
+    </div>
+  );
+}
+
+export default App;
+```
+
+**Explanation:**
+
+* `selectedStock` stores which stock was clicked
+* `setSelectedStock` passed as `onSelect` to `SearchBox`
+* Updates display below search box
+
+**Output:** User clicks a suggestion → selected stock is displayed
+
+---
+
+## 🕔 Step 5 – Backend CORS Fix
+
+**File:** `backend/app/main.py`
+
+```python
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # frontend URL
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+```
+
+**Why:**
+
+* Frontend runs on `5173`, backend on `8000` → cross-origin request blocked by browser
+* CORS middleware allows frontend to fetch `/search`
+
+✅ Tested and working
+
+---
+
+## 🕕 Step 6 – Backend Search Endpoint
+
+**Endpoint in `main.py`:**
+
+```python
+@app.get("/search")
+def autocomplete(q: str = Query(..., min_length=1, max_length=10)):
+    results = search_stocks(q)
+    return {"query": q, "results": results}
+```
+
+**Notes for beginners:**
+
+* `Query(...)` → validates query parameters (min 1 char, max 10 chars)
+* Returns list of stocks matching the prefix
+* Fully connected to frontend search box
+
+---
+
+## 🟩 Day 7 – Files created / edited
+
+| File                                     | Location    | Purpose                                        |
+| ---------------------------------------- | ----------- | ---------------------------------------------- |
+| `frontend/`                              | root folder | React + Vite frontend                          |
+| `frontend/src/components/SearchBox.jsx`  | new         | Autocomplete search box component              |
+| `frontend/src/App.jsx`                   | edited      | Integrates SearchBox and shows selected stock  |
+| `backend/app/main.py`                    | edited      | Added CORS + search endpoint                   |
+| `backend/app/services/search_service.py` | existing    | Function `search_stocks()` called by `/search` |
+
+---
+
+## 🟦 Day 7 – Output / Deliverables
+
+* **Frontend search box** works
+* **Autocomplete** suggestions from backend API
+* **Clicking a suggestion** updates displayed stock
+* **Backend CORS fixed** → frontend communicates without errors
+* Basic **React + Vite** setup complete, ready for charts & stock details next
+
+---
+
+💡 **Next logical step (Day 8)**:
+
+* Display **historical stock data charts** for selected stock using `Recharts`
+* Pull data from CSV (from Day 5)
+* Show **line chart of closing prices**, similar to real stock graphs
+
+---
+
+If you want, I can write **Day 8 in extreme detail**, including **React chart setup, fetching CSV, and rendering dynamic graphs** step by step for beginners.
+
+Do you want me to do that next?

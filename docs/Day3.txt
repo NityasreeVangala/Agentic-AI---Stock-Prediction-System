@@ -1,0 +1,386 @@
+Perfect.
+**Day 3 is the first real “engineering” day** — but we will still go **slow, deliberate, and beginner-safe**.
+By the end of today, you will have **a running backend API**, even if it does nothing intelligent yet.
+
+Think of Day 3 as **laying the foundation of a building**. No rooms yet. Just strong pillars.
+
+---
+
+# 🟢 DAY 3 (5 HOURS)
+
+## “Backend Setup + First Running API (Beginner → Professional)”
+
+---
+
+# ⏱️ TIME BREAKDOWN
+
+| Time      | What you do                                       |
+| --------- | ------------------------------------------------- |
+| 0:00–0:45 | What a backend actually is                        |
+| 0:45–1:30 | Create project & Git repo                         |
+| 1:30–2:30 | Backend folder structure (why each folder exists) |
+| 2:30–3:30 | FastAPI basics                                    |
+| 3:30–4:30 | First API endpoint                                |
+| 4:30–5:00 | Test & sanity check                               |
+
+---
+
+# 🔹 PART 1 (0:00–0:45)
+
+## What Is a Backend? (Beginner Explanation)
+
+### ❌ Beginner misconception
+
+> “Backend is just Python code that does ML.”
+
+### ✅ Reality
+
+Backend is:
+
+> The **brain + control center** of your application.
+
+It:
+
+* Receives requests from frontend
+* Fetches data
+* Runs logic
+* Returns structured responses (JSON)
+
+---
+
+### Simple analogy
+
+Frontend = restaurant menu
+Backend = kitchen
+
+User clicks “Search TCS” →
+Backend:
+
+1. Understands request
+2. Fetches data
+3. Processes logic
+4. Sends response back
+
+---
+
+### Why backend comes before ML
+
+If backend is messy:
+
+* You cannot scale
+* You cannot debug
+* You cannot integrate frontend
+
+So today we **only care about structure**, not intelligence.
+
+---
+
+# 🔹 PART 2 (0:45–1:30)
+
+## Create Project & Git Repository
+
+### Step 1: Create project root folder
+
+Name it something clear and professional:
+
+```
+agentic-stock-ai/
+```
+
+This is your **entire project**.
+
+---
+
+### Step 2: Initialize Git
+
+Inside that folder:
+
+```
+git init
+```
+
+Why?
+
+* Version control
+* Rollback mistakes
+* Looks professional on GitHub
+
+---
+
+### Step 3: Create `.gitignore`
+
+Create a file called `.gitignore`:
+
+```text
+__pycache__/
+.env
+.venv/
+node_modules/
+```
+
+📌 This prevents junk files from entering Git.
+
+---
+
+# 🔹 PART 3 (1:30–2:30)
+
+## Backend Folder Structure (VERY IMPORTANT)
+
+Now create this structure **exactly**:
+
+```
+agentic-stock-ai/
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── api/
+│   │   ├── services/
+│   │   ├── agents/
+│   │   ├── models/
+│   │   ├── utils/
+│   │   └── config.py
+│   └── requirements.txt
+├── docs/
+│   ├── day1_mental_model.md
+│   └── day2_market_data_notes.md
+```
+
+---
+
+## 🧠 WHY EACH FOLDER EXISTS (BEGINNER SAFE)
+
+### `main.py`
+
+* Entry point
+* Starts FastAPI server
+
+---
+
+### `api/`
+
+* All API routes go here
+* Example: `/search`, `/fundamentals`
+
+---
+
+### `services/`
+
+* Data fetching
+* Calculations
+* Business logic
+
+---
+
+### `agents/`
+
+* Each “thinking unit”
+* Fundamentals agent, technical agent, etc.
+
+---
+
+### `models/`
+
+* Database schemas
+* ML model objects (later)
+
+---
+
+### `utils/`
+
+* Helper functions
+* Reusable utilities
+
+---
+
+### `config.py`
+
+* Global settings
+* Environment variables
+
+---
+
+### Key Rule (Write This Down)
+
+> **Routes don’t think.
+> Agents think.
+> Services do work.**
+
+---
+
+# 🔹 PART 4 (2:30–3:30)
+
+## FastAPI Basics (Slow & Clear)
+
+### Step 1: Install FastAPI
+
+Create `requirements.txt` inside `backend/`:
+
+```text
+fastapi
+uvicorn
+```
+
+Install:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### Step 2: Write `main.py`
+
+Open `backend/app/main.py`:
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI(
+    title="Agentic Stock AI",
+    description="Multi-model stock analysis system",
+    version="0.1.0"
+)
+
+@app.get("/")
+def root():
+    return {"message": "Stock AI backend is running"}
+```
+
+---
+
+### What is happening here?
+
+* `FastAPI()` → creates backend app
+* `@app.get("/")` → URL endpoint
+* Function returns JSON
+
+---
+
+### Step 3: Run the server
+
+From `backend/` folder:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+---
+
+### Expected output in browser
+
+Go to:
+
+```
+http://127.0.0.1:8000
+```
+
+You should see:
+
+```json
+{
+  "message": "Stock AI backend is running"
+}
+```
+
+🎉 **Your backend is alive.**
+
+---
+
+# 🔹 PART 5 (3:30–4:30)
+
+## Add a Health Check Endpoint (Professional Practice)
+
+Add this to `main.py`:
+
+```python
+@app.get("/health")
+def health():
+    return {
+        "status": "ok",
+        "service": "stock-ai-backend"
+    }
+```
+
+---
+
+### Why this matters
+
+* Frontend can check backend health
+* DevOps best practice
+* Used in production monitoring
+
+---
+
+### Test it
+
+Go to:
+
+```
+http://127.0.0.1:8000/health
+```
+
+---
+
+# 🔹 PART 6 (4:30–5:00)
+
+## Test & Sanity Check
+
+### Visit Swagger UI
+
+```
+http://127.0.0.1:8000/docs
+```
+
+You should see:
+
+* API title
+* Endpoints listed
+* Try-it-out feature
+
+---
+
+### Important realization
+
+👉 You wrote **zero ML code**
+👉 Yet you already have a **working product component**
+
+This is how real systems are built.
+
+---
+
+# ✅ FILES CREATED ON DAY 3 (FINAL LIST)
+
+```
+agentic-stock-ai/
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── api/
+│   │   ├── services/
+│   │   ├── agents/
+│   │   ├── models/
+│   │   ├── utils/
+│   │   └── config.py
+│   └── requirements.txt
+├── .gitignore
+└── docs/
+```
+
+---
+
+# 🧠 DAY 3 FINAL MENTAL MODEL
+
+> “A strong backend is not smart — it is organized.
+> Intelligence comes later, structure comes first.”
+
+---
+
+# 🔜 DAY 4 PREVIEW
+
+On **Day 4**, you will:
+
+* Write your **first real service**
+* Fetch historical stock data
+* Touch Pandas for the first time
+
+If you want, say **“Day 4”** and I’ll continue in the same extreme beginner depth.

@@ -1,0 +1,308 @@
+Perfect! Let’s do a **complete, detailed summary of Days 1–7** for your **Agentic Stock AI project**. I’ll explain **every task, step, and file**, like a tutorial for a beginner, including your final **project structure**. This will be your **reference guide before moving to Day 8** (charts).
+
+---
+
+# 🏗 AGENTIC STOCK AI – DAYS 1 TO 7 (EXTREME DETAIL)
+
+---
+
+## **DAY 1 – Understanding Stock Prediction & LLMs (4h)**
+
+**Goal:** Build a clear mental model of **stock prediction** before touching code.
+
+**Tasks:**
+
+1. **Understand the difference between LLM & predictor**
+
+   * LLM (like ChatGPT) can explain stock trends, do research, but **cannot predict prices accurately**
+   * Real stock prediction uses **time series forecasting**, **technical indicators**, **fundamentals**, etc.
+
+2. **Study Time Series Basics**
+
+   * Features: OHLCV → Open, High, Low, Close, Volume
+   * Patterns: Trend, Seasonality, Noise
+
+3. **Learn pitfalls**
+
+   * Overfitting → model memorizes past data, fails on unseen data
+   * Lookahead bias → using future information for past predictions
+
+**Output:**
+
+* Mental clarity on why we need **historical stock data** + **technical indicators**
+* No code or files created on Day 1
+
+---
+
+## **DAY 2 – Understanding NSE & BSE Data (4h)**
+
+**Goal:** Understand stock market data for India (NSE + BSE).
+
+**Tasks:**
+
+1. Study **data structure**:
+
+   * OHLCV: Open, High, Low, Close, Volume
+   * Date format, timezone (IST)
+
+2. Corporate actions:
+
+   * Splits → adjust historical prices
+   * Dividends → may affect closing price
+
+3. **Align NSE & BSE**
+
+   * Ensure dates match for merging datasets
+
+**Output:**
+
+* Notes on stock data structure
+* No code implemented yet
+
+---
+
+## **DAY 3 – Backend Setup (5h)**
+
+**Goal:** Setup **FastAPI backend**.
+
+**Tasks:**
+
+1. **Create project folder structure**:
+
+```
+agentic-stock-ai-11/
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py             # FastAPI entry point
+│   │   ├── services/
+│   │   │   ├── __init__.py
+│   │   │   └── data_fetcher.py # fetch & clean stock data
+│   │   │   └── search_service.py # prefix search function
+│   ├── tests/
+│   │   ├── test_data_fetch.py   # test CSV fetch + cleaning
+│   │   └── save_data_to_csv.py  # save stock data to CSV
+│   └── data/                    # CSVs will go here
+├── frontend/
+```
+
+2. **FastAPI boilerplate (`main.py`)**:
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI(title="Agentic Stock AI", version="0.1.0")
+
+@app.get("/")
+def root():
+    return {"message": "Backend running"}
+```
+
+**Output:**
+
+* Running backend API: `http://127.0.0.1:8000/` returns `{"message":"Backend running"}`
+
+---
+
+## **DAY 4 – Fetch Historical Stock Data (4h)**
+
+**Goal:** Pull **historical stock prices** from 2010 → 31-12-2025.
+
+**Tasks:**
+
+1. Use **NSE + BSE CSV files or API**
+2. Handle **missing dates** (weekends, holidays)
+3. Merge NSE & BSE data → `Close_Final` column
+4. Sample code in `data_fetcher.py`:
+
+```python
+import pandas as pd
+
+def fetch_stock_data(symbol: str):
+    df = pd.read_csv(f"raw_data/{symbol}.csv")
+    return df
+
+def clean_stock_data(df):
+    df['Date'] = pd.to_datetime(df['Date'])
+    df = df.sort_values('Date').reset_index(drop=True)
+    return df
+```
+
+5. Test file: `tests/test_data_fetch.py`
+
+**Output:**
+
+* Clean merged dataset for each stock
+* Verified last date: `2025-12-30`
+
+---
+
+## **DAY 5 – Store Data (CSV version, 4h)**
+
+**Goal:** Save cleaned stock data for later use in **frontend charts**.
+
+**Tasks:**
+
+1. Save each stock to `backend/data/` folder:
+
+```python
+symbols = ["TCS", "RELIANCE", "HDFCBANK", "YESBANK", "INFY"]
+for s in symbols:
+    df = clean_stock_data(fetch_stock_data(s))
+    df.to_csv(f"data/{s}.csv", index=False)
+    print(f"[INFO] Saved {s} data")
+```
+
+2. **Test file:** `tests/save_data_to_csv.py`
+
+**Output:**
+
+* `backend/data/` now contains:
+
+```
+data/
+├── TCS.csv
+├── RELIANCE.csv
+├── HDFCBANK.csv
+├── YESBANK.csv
+├── INFY.csv
+```
+
+* Each CSV is queryable & clean
+
+**Note:** You chose **CSV instead of PostgreSQL** → simpler for frontend consumption
+
+---
+
+## **DAY 6 – Autocomplete Search API (4h)**
+
+**Goal:** Backend **prefix search** API for stock symbols
+
+**Tasks:**
+
+1. Implement `search_stocks()` in `services/search_service.py`:
+
+```python
+STOCKS = ["TCS", "RELIANCE", "HDFCBANK", "YESBANK", "INFY"]
+
+def search_stocks(query: str):
+    query = query.upper()
+    return [s for s in STOCKS if s.startswith(query)]
+```
+
+2. Add **FastAPI endpoint** in `main.py`:
+
+```python
+from fastapi import Query
+
+@app.get("/search")
+def autocomplete(q: str = Query(..., min_length=1, max_length=10)):
+    results = search_stocks(q)
+    return {"query": q, "results": results}
+```
+
+3. Add **CORS** for frontend (`5173`):
+
+```python
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+```
+
+**Output:**
+
+* `/search?q=rel` returns `["RELIANCE"]`
+* Backend ready for React frontend
+
+---
+
+## **DAY 7 – React + Vite + Search UI (4h)**
+
+**Goal:** Build **frontend** to call `/search` and display results
+
+**Tasks:**
+
+1. **Vite React Setup:**
+
+```bash
+npm create vite@latest frontend
+npm install axios
+```
+
+2. **File: `frontend/src/components/SearchBox.jsx`**
+
+* Input box + autocomplete dropdown
+* Calls backend `/search?q=...` on each keystroke
+
+3. **File: `frontend/src/App.jsx`**
+
+* Integrates SearchBox
+* Displays **selected stock**
+
+4. **Backend already CORS-ready** → frontend works
+
+**Output:**
+
+* Search box working
+* Autocomplete suggestions fetch from backend
+* Click updates selected stock
+
+---
+
+## ✅ FINAL PROJECT STRUCTURE (AFTER DAY 7)
+
+```
+agentic-stock-ai-11/
+├── backend/
+│   ├── app/
+│   │   ├── __init__.py
+│   │   ├── main.py                 # FastAPI + CORS + search endpoint
+│   │   └── services/
+│   │       ├── __init__.py
+│   │       ├── data_fetcher.py     # fetch + clean CSV data
+│   │       └── search_service.py   # autocomplete logic
+│   ├── tests/
+│   │   ├── test_data_fetch.py      # test CSV fetching
+│   │   └── save_data_to_csv.py     # save data to CSV
+│   └── data/                        # cleaned stock CSVs
+│       ├── TCS.csv
+│       ├── RELIANCE.csv
+│       ├── HDFCBANK.csv
+│       ├── YESBANK.csv
+│       └── INFY.csv
+├── frontend/
+│   ├── index.html
+│   ├── package.json
+│   └── src/
+│       ├── main.jsx
+│       ├── App.jsx                  # integrates SearchBox
+│       └── components/
+│           └── SearchBox.jsx       # autocomplete component
+```
+
+---
+
+## ✅ DAY 1–7 SUMMARY (BEGINNER-FRIENDLY)
+
+| Day | Goal                          | Output / Deliverable                                           |
+| --- | ----------------------------- | -------------------------------------------------------------- |
+| 1   | Understand stock prediction   | Mental model, notes                                            |
+| 2   | Study NSE/BSE data            | Notes on OHLCV + corporate actions                             |
+| 3   | Setup backend                 | FastAPI boilerplate running (`main.py`)                        |
+| 4   | Fetch & clean historical data | Clean datasets, tested in `test_data_fetch.py`                 |
+| 5   | Save data to CSV              | `backend/data/*.csv` ready for frontend                        |
+| 6   | Autocomplete API              | `/search?q=...` works, CORS enabled                            |
+| 7   | React + Vite + Search UI      | SearchBox displays results dynamically, selected stock updates |
+
+---
+
+This is **your full foundation**. ✅
+
+* Backend is **FastAPI**, serves CSV data, search API works
+* Frontend is **React + Vite**, search box works
+* CORS fixed, ready for **charts + predictions**
+

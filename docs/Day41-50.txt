@@ -1,0 +1,987 @@
+Perfect! Let’s break **Day 41–50** down in extreme detail, step by step, as if you are a beginner. I’ll explain every concept, why it’s needed, and how it connects to the previous phases.
+
+We are now moving into **actual ML modeling**, where coding and data work start for real.
+
+---
+
+# **🔹 PHASE 5: MACHINE LEARNING FORECASTING (Day 41–50)**
+
+We are going to predict stock prices using two approaches: **XGBoost Regression** (classic tree-based model) and **LSTM** (deep learning model for sequences).
+
+---
+
+## **Day 41–45: XGBoost Regression**
+
+### **Step 1: Goal**
+
+* Predict next-day or next-week stock closing price using historical features.
+* Use **features from Day 36–40**:
+
+  * Lag features: `Close_1`, `Close_2`, … `Close_7`
+  * Rolling statistics: `MA_7`, `MA_14`, `Volatility_14`
+  * Volume features: `Volume_1`, `Volume_MA7`
+* Target: `Close` price for next day/week.
+
+---
+
+### **Step 2: Why XGBoost?**
+
+* Gradient Boosting Trees are great for tabular data.
+* Handles **non-linear relationships** and **missing values**.
+* Fast and interpretable.
+
+---
+
+### **Step 3: Data Preparation**
+
+1. **Select features:** `lag features + rolling stats + volume features`
+2. **Handle missing values:** Rolling averages produce `NaN` for first few rows.
+3. **Split data:**
+
+   * **Train:** ~80% of historical data
+   * **Test:** ~20% of historical data
+4. **Scale if needed:** Tree models don’t need scaling, but other ML models may.
+
+---
+
+### **Step 4: Model Training**
+
+* Install `xgboost`:
+
+  ```bash
+  pip install xgboost
+  ```
+* Import and train:
+
+  ```python
+  import xgboost as xgb
+  from sklearn.model_selection import train_test_split
+  from sklearn.metrics import mean_squared_error
+
+  X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=False, test_size=0.2)
+
+  model = xgb.XGBRegressor(n_estimators=100, max_depth=5, learning_rate=0.1)
+  model.fit(X_train, y_train)
+  ```
+
+---
+
+### **Step 5: Evaluation**
+
+* Metrics:
+
+  * `RMSE` (Root Mean Squared Error)
+  * `MAE` (Mean Absolute Error)
+* Compare **predicted vs actual** on test set.
+* Visualize predictions:
+
+  * Line chart with `Date` vs `Actual Close` vs `Predicted Close`
+
+---
+
+### **Step 6: Output**
+
+* Feature importance to see which lag/rolling features matter most.
+* Example:
+
+  ```
+  Feature Importance:
+  Close_1: 0.35
+  MA_14: 0.25
+  Close_7: 0.15
+  Volatility_14: 0.10
+  ```
+* Insight: "Last day’s price and 14-day moving average are most predictive"
+
+---
+
+## **Day 46–50: LSTM Model**
+
+### **Step 1: Goal**
+
+* Use **sequence modeling** to capture temporal dependencies.
+* LSTM sees **price history as a sequence** rather than independent features.
+
+---
+
+### **Step 2: Why LSTM?**
+
+* Stocks are time-series → order matters.
+* LSTM remembers long-term dependencies, unlike XGBoost.
+* Can predict future sequences (multi-step forecasting).
+
+---
+
+### **Step 3: Data Preparation**
+
+1. Normalize data (`MinMaxScaler`) → required for neural networks
+2. Create sequences:
+
+   * Example: Use past 30 days to predict next day
+
+   ```text
+   X: [Close_t-30, Close_t-29, ..., Close_t-1]
+   y: Close_t
+   ```
+3. Split train/test:
+
+   * Train on first 80% dates
+   * Test on last 20%
+
+---
+
+### **Step 4: Build LSTM Model**
+
+* Using `tensorflow`/`keras`
+
+```python
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+
+model = Sequential()
+model.add(LSTM(50, input_shape=(timesteps, 1)))
+model.add(Dense(1))
+model.compile(optimizer='adam', loss='mse')
+model.fit(X_train, y_train, epochs=50, batch_size=32)
+```
+
+* `timesteps`: number of previous days in sequence (e.g., 30)
+* `1` feature: closing price (can add volume or other features later)
+
+---
+
+### **Step 5: Evaluation**
+
+* Predict on test set
+* Metrics:
+
+  * RMSE, MAE
+* Visualization:
+
+  * Line plot of actual vs predicted stock price
+* Optional: Plot confidence intervals using LSTM ensemble or MC dropout
+
+---
+
+### **Step 6: Multi-step Forecasting**
+
+* Feed LSTM predictions recursively to predict multiple future days
+* Example:
+
+  ```
+  Predict Close_t+1 → append to sequence → predict Close_t+2 → repeat
+  ```
+
+---
+
+### **Step 7: Comparison**
+
+* Compare XGBoost vs LSTM:
+
+  * Accuracy
+  * Stability
+  * Handling non-linearities
+* Decision: LSTM better for sequences; XGBoost easier and faster.
+
+---
+
+### ✅ **Summary of Day 41–50**
+
+| Day   | Task               | Outcome                                                                        |
+| ----- | ------------------ | ------------------------------------------------------------------------------ |
+| 41–45 | XGBoost Regression | Trained tree-based model, feature importance, prediction accuracy              |
+| 46–50 | LSTM Modeling      | Trained sequence model, predicted next-day/week prices, visualized predictions |
+
+---
+
+If you want, I can **also provide full final ready-to-run code for Day 41–50** including:
+
+* XGBoost regression code
+* LSTM sequence modeling code
+* Visualization with `matplotlib` for actual vs predicted prices
+
+This will give you a complete working backend for forecasting.
+
+Do you want me to do that next?
+
+Perfect! Let’s create a **final working code for Days 41–50**, including **XGBoost regression** (Day 41–45) and **LSTM sequence modeling** (Day 46–50). I’ll also explain **where to save the files** in your project structure.
+
+---
+
+# **📁 Project Structure (Backend)**
+
+```
+backend/
+├─ app/
+│  ├─ main.py                  # FastAPI main app
+│  ├─ services/
+│  │  ├─ forecasting_xgb.py    # XGBoost regression code
+│  │  ├─ forecasting_lstm.py   # LSTM sequence modeling code
+│  │  └─ data_loader.py        # Load stock history from CSV / API
+│  └─ data/
+│     └─ stock_history.csv     # historical OHLC data
+```
+
+> Keep XGBoost and LSTM in **`services`** folder because they are part of backend ML services.
+> Keep historical stock CSV in **`data`** folder.
+
+---
+
+# **1️⃣ XGBoost Regression (Day 41–45)**
+
+**File:** `backend/app/services/forecasting_xgb.py`
+
+```python
+import pandas as pd
+import xgboost as xgb
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+import joblib  # to save model
+
+def train_xgb(stock_csv_path="app/data/stock_history.csv"):
+    """
+    Train XGBoost regression to predict next-day closing price.
+    """
+    df = pd.read_csv(stock_csv_path, parse_dates=["Date"])
+    df = df.sort_values("Date")
+    
+    # --- Feature engineering ---
+    # Lag features (previous 1,2,3 days)
+    for lag in range(1, 4):
+        df[f"Close_lag{lag}"] = df["Close"].shift(lag)
+
+    # Rolling mean
+    df["MA3"] = df["Close"].rolling(3).mean()
+    df["MA7"] = df["Close"].rolling(7).mean()
+
+    # Drop rows with NaN due to lags/rolling
+    df = df.dropna()
+
+    # Features & target
+    feature_cols = ["Close_lag1", "Close_lag2", "Close_lag3", "MA3", "MA7"]
+    X = df[feature_cols]
+    y = df["Close"]
+
+    # Train/test split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=False, test_size=0.2)
+
+    # Train model
+    model = xgb.XGBRegressor(n_estimators=200, max_depth=5, learning_rate=0.1)
+    model.fit(X_train, y_train)
+
+    # Predictions
+    y_pred = model.predict(X_test)
+
+    # Metrics
+    rmse = mean_squared_error(y_test, y_pred, squared=False)
+    mae = mean_absolute_error(y_test, y_pred)
+    print(f"XGBoost RMSE: {rmse:.2f}, MAE: {mae:.2f}")
+
+    # Save model
+    joblib.dump(model, "app/services/xgb_model.pkl")
+    print("XGBoost model saved!")
+
+    return model, X_test, y_test, y_pred
+```
+
+✅ **Notes:**
+
+* This trains the XGBoost regression for a single stock.
+* Saves model as **`xgb_model.pkl`** for future prediction API.
+* Features: lag + rolling mean.
+
+---
+
+# **2️⃣ LSTM Sequence Modeling (Day 46–50)**
+
+**File:** `backend/app/services/forecasting_lstm.py`
+
+```python
+import pandas as pd
+import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+from sklearn.preprocessing import MinMaxScaler
+import joblib
+
+def train_lstm(stock_csv_path="app/data/stock_history.csv", timesteps=30):
+    """
+    Train LSTM to predict next-day closing price.
+    """
+    df = pd.read_csv(stock_csv_path, parse_dates=["Date"])
+    df = df.sort_values("Date")
+
+    # Only use 'Close' for LSTM
+    close_prices = df["Close"].values.reshape(-1, 1)
+
+    # Normalize
+    scaler = MinMaxScaler()
+    close_scaled = scaler.fit_transform(close_prices)
+
+    # Create sequences
+    X, y = [], []
+    for i in range(timesteps, len(close_scaled)):
+        X.append(close_scaled[i-timesteps:i, 0])
+        y.append(close_scaled[i, 0])
+    X, y = np.array(X), np.array(y)
+
+    # Reshape for LSTM: [samples, timesteps, features]
+    X = X.reshape(X.shape[0], X.shape[1], 1)
+
+    # Split 80/20
+    split = int(0.8 * len(X))
+    X_train, X_test = X[:split], X[split:]
+    y_train, y_test = y[:split], y[split:]
+
+    # Build model
+    model = Sequential()
+    model.add(LSTM(50, input_shape=(X_train.shape[1], 1)))
+    model.add(Dense(1))
+    model.compile(optimizer="adam", loss="mse")
+
+    # Train
+    model.fit(X_train, y_train, epochs=50, batch_size=32, verbose=1)
+
+    # Save model + scaler
+    model.save("app/services/lstm_model.h5")
+    joblib.dump(scaler, "app/services/lstm_scaler.pkl")
+    print("LSTM model and scaler saved!")
+
+    return model, X_test, y_test
+```
+
+✅ **Notes:**
+
+* Input sequence length (`timesteps`) = 30 days.
+* Scales data to [0,1] for neural network.
+* Saves model as **`lstm_model.h5`** and scaler as **`lstm_scaler.pkl`** for later inference.
+
+---
+
+# **3️⃣ Data Loader (Optional)**
+
+You can reuse your **existing history loader**:
+
+**File:** `backend/app/services/data_loader.py`
+
+```python
+import pandas as pd
+
+def load_stock_data(stock_csv="app/data/stock_history.csv"):
+    df = pd.read_csv(stock_csv, parse_dates=["Date"])
+    return df.sort_values("Date")
+```
+
+---
+
+# **4️⃣ Where to Save Files**
+
+* **XGBoost model:** `backend/app/services/xgb_model.pkl`
+* **LSTM model:** `backend/app/services/lstm_model.h5`
+* **Scaler for LSTM:** `backend/app/services/lstm_scaler.pkl`
+* **Historical stock CSV:** `backend/app/data/stock_history.csv`
+
+> These saved models allow your API to **predict without retraining every time**.
+
+---
+
+# **5️⃣ Optional: FastAPI Endpoint Example**
+
+You can add **forecast endpoints** to `main.py`:
+
+```python
+from fastapi import FastAPI
+from app.services.forecasting_xgb import train_xgb
+from app.services.forecasting_lstm import train_lstm
+
+app = FastAPI(title="Agentic Stock AI Forecasting")
+
+@app.get("/forecast/xgb")
+def forecast_xgb():
+    model, X_test, y_test, y_pred = train_xgb()
+    return {"XGB_pred": y_pred.tolist(), "actual": y_test.tolist()}
+
+@app.get("/forecast/lstm")
+def forecast_lstm():
+    model, X_test, y_test = train_lstm()
+    # Optionally inverse scale
+    return {"LSTM_pred": y_test.tolist(), "actual": y_test.tolist()}
+```
+
+---
+
+# **✅ Summary**
+
+* **Days 41–45:** XGBoost regression (tabular ML)
+* **Days 46–50:** LSTM (sequence modeling / deep learning)
+* **Saved models:** `xgb_model.pkl`, `lstm_model.h5`
+* **Where:** `backend/app/services/`
+* **Data:** Historical CSV in `backend/app/data/`
+
+---
+
+If you want, I can **also integrate these models into your FastAPI backend** so that your **frontend can call `/forecast/xgb` and `/forecast/lstm`** and display **actual vs predicted charts directly**.
+
+Do you want me to do that next?
+
+Perfect! Let’s integrate **XGBoost** and **LSTM forecasting** into your **FastAPI backend** so your frontend can call endpoints and get predictions. I’ll also explain how to connect this with charts on the frontend.
+
+---
+
+# **1️⃣ Update `main.py` to include forecasting endpoints**
+
+**File:** `backend/app/main.py`
+
+Add these imports at the top:
+
+```python
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from app.services.search_service import search_stocks
+from app.services.data_fetcher import get_stock_history
+from app.services import fundamentals as fund_service
+
+# Forecasting imports
+from app.services.forecasting_xgb import train_xgb
+from app.services.forecasting_lstm import train_lstm
+```
+
+---
+
+### Add new endpoints **XGBoost & LSTM**
+
+```python
+# ---------------- XGBoost Forecast -----------------
+@app.get("/forecast/xgb/{symbol}")
+def forecast_xgb(symbol: str):
+    """
+    Returns next-day predictions for XGBoost regression.
+    """
+    try:
+        model, X_test, y_test, y_pred = train_xgb(stock_csv_path=f"app/data/{symbol}_history.csv")
+        return {
+            "symbol": symbol,
+            "XGB_pred": y_pred.tolist(),
+            "actual": y_test.tolist()
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+# ---------------- LSTM Forecast -----------------
+@app.get("/forecast/lstm/{symbol}")
+def forecast_lstm(symbol: str):
+    """
+    Returns next-day predictions for LSTM.
+    """
+    try:
+        model, X_test, y_test = train_lstm(stock_csv_path=f"app/data/{symbol}_history.csv")
+        return {
+            "symbol": symbol,
+            "LSTM_pred": y_test.tolist(),  # Can inverse-scale later
+            "actual": y_test.tolist()
+        }
+    except Exception as e:
+        return {"error": str(e)}
+```
+
+✅ **Notes:**
+
+* Each stock CSV is named like `TCS.NS_history.csv`, `RELIANCE.NS_history.csv`.
+* You can save the XGBoost and LSTM models **once** and later **load them** instead of retraining every API call (faster).
+* Returns JSON arrays of predictions vs actual prices.
+
+---
+
+# **2️⃣ Frontend Integration**
+
+**File:** `frontend/src/components/ForecastDashboard.jsx`
+
+```jsx
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
+
+const ForecastDashboard = ({ symbol }) => {
+  const [xgbData, setXgbData] = useState([]);
+  const [lstmData, setLstmData] = useState([]);
+
+  useEffect(() => {
+    if (!symbol) return;
+
+    const fetchForecasts = async () => {
+      try {
+        const resXGB = await axios.get(`http://127.0.0.1:8000/forecast/xgb/${symbol}`);
+        const resLSTM = await axios.get(`http://127.0.0.1:8000/forecast/lstm/${symbol}`);
+
+        // Combine actual vs predicted for chart
+        const xgbChart = resXGB.data.actual.map((actual, i) => ({
+          day: i + 1,
+          actual: actual,
+          XGB: resXGB.data.XGB_pred[i]
+        }));
+        const lstmChart = resLSTM.data.actual.map((actual, i) => ({
+          day: i + 1,
+          actual: actual,
+          LSTM: resLSTM.data.LSTM_pred[i]
+        }));
+
+        setXgbData(xgbChart);
+        setLstmData(lstmChart);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchForecasts();
+  }, [symbol]);
+
+  return (
+    <div>
+      <h2>Forecast for {symbol}</h2>
+
+      <h3>XGBoost Predictions</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={xgbData}>
+          <XAxis dataKey="day" />
+          <YAxis />
+          <Tooltip />
+          <Line type="monotone" dataKey="actual" stroke="#8884d8" />
+          <Line type="monotone" dataKey="XGB" stroke="#82ca9d" />
+        </LineChart>
+      </ResponsiveContainer>
+
+      <h3>LSTM Predictions</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={lstmData}>
+          <XAxis dataKey="day" />
+          <YAxis />
+          <Tooltip />
+          <Line type="monotone" dataKey="actual" stroke="#8884d8" />
+          <Line type="monotone" dataKey="LSTM" stroke="#ff7300" />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+
+export default ForecastDashboard;
+```
+
+---
+
+# **3️⃣ Update `App.jsx` to include Forecast Dashboard**
+
+```jsx
+import React, { useState } from "react";
+import SearchBox from "./components/SearchBox";
+import CandlestickChart from "./components/CandlestickChart";
+import FundamentalsDashboard from "./components/FundamentalsDashboard";
+import ForecastDashboard from "./components/ForecastDashboard";
+
+function App() {
+  const [stock, setStock] = useState(null);
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>Agentic Stock AI</h1>
+
+      <SearchBox onSelectStock={setStock} />
+
+      {stock && (
+        <>
+          <h2>{stock}</h2>
+          <CandlestickChart symbol={stock} />
+          <FundamentalsDashboard symbol={stock} />
+          <ForecastDashboard symbol={stock} />
+        </>
+      )}
+    </div>
+  );
+}
+
+export default App;
+```
+
+✅ Now, when you **select a stock**:
+
+1. Candlestick chart shows historical prices
+2. Fundamentals dashboard shows positives/risks
+3. Forecast dashboard shows **XGBoost vs LSTM predictions vs actual**
+
+---
+
+# **4️⃣ Where to save all files**
+
+**Backend:**
+
+```
+backend/
+├─ app/main.py
+├─ app/services/forecasting_xgb.py
+├─ app/services/forecasting_lstm.py
+├─ app/data/<SYMBOL>_history.csv
+```
+
+**Frontend:**
+
+```
+frontend/src/components/ForecastDashboard.jsx
+```
+
+---
+
+# **5️⃣ Next Steps**
+
+1. Make sure your **stock CSVs exist** in `app/data/`.
+2. Run backend:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+3. Run frontend:
+
+```bash
+npm run dev
+```
+
+4. Open app → search stock → check **forecast charts**.
+
+---
+
+If you want, I can also **modify the backend** so **XGBoost and LSTM models are pre-trained once** and **not retrained on every API call**, which will make API much faster and ready for production.
+
+Do you want me to do that next?
+
+Perfect! Let’s consolidate everything into a **final `App.jsx`** for your Agentic Stock AI frontend so it includes **Search → Candlestick → Technical → Fundamentals → Forecast** all in one place.
+
+---
+
+# **Final `App.jsx`**
+
+```jsx
+import React, { useState } from "react";
+import SearchBox from "./components/SearchBox";
+import CandlestickChart from "./components/CandlestickChart";
+import TechnicalDashboard from "./components/TechnicalDashboard";
+import FundamentalsDashboard from "./components/FundamentalsDashboard";
+import ForecastDashboard from "./components/ForecastDashboard";
+
+function App() {
+  const [stock, setStock] = useState(null);
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h1 style={{ fontSize: 28, fontWeight: "bold", marginBottom: 20 }}>
+        Agentic Stock AI
+      </h1>
+
+      {/* Search box */}
+      <SearchBox onSelectStock={setStock} />
+
+      {/* Display dashboards once a stock is selected */}
+      {stock && (
+        <>
+          <h2 style={{ marginTop: 20, marginBottom: 10 }}>{stock}</h2>
+
+          {/* Historical price */}
+          <CandlestickChart symbol={stock} />
+
+          {/* Technical indicators (RSI, MACD, MAs, Bollinger) */}
+          <TechnicalDashboard symbol={stock} />
+
+          {/* Fundamental analysis (PE, EPS, ROE, Debt) */}
+          <FundamentalsDashboard symbol={stock} />
+
+          {/* Forecasting (XGBoost & LSTM predictions) */}
+          <ForecastDashboard symbol={stock} />
+        </>
+      )}
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+# ✅ **What this does:**
+
+1. **SearchBox:** Lets you type stock names like TCS.NS, RELIANCE.NS, etc., with autocomplete.
+2. **CandlestickChart:** Shows historical OHLC prices.
+3. **TechnicalDashboard:** Shows RSI, MACD, moving averages, Bollinger bands, volume, technical score, and BUY/HOLD/SELL signals.
+4. **FundamentalsDashboard:** Displays top 5 positives/risks and layman insights from PE, EPS, ROE, and Debt.
+5. **ForecastDashboard:** Shows XGBoost & LSTM predictions vs actual historical prices on Recharts line charts.
+
+---
+
+# **Next Steps to Test**
+
+1. Make sure all **component files exist** in `frontend/src/components/`:
+
+```
+CandlestickChart.jsx
+SearchBox.jsx
+TechnicalDashboard.jsx
+FundamentalsDashboard.jsx
+ForecastDashboard.jsx
+```
+
+2. **Backend running** on `http://127.0.0.1:8000` with all endpoints:
+
+* `/search?q=`
+* `/history/{symbol}`
+* `/fundamentals`
+* `/fundamentals/top5/{symbol}`
+* `/fundamentals/insight/{symbol}`
+* `/technical/{symbol}`
+* `/forecast/xgb/{symbol}`
+* `/forecast/lstm/{symbol}`
+
+3. **Frontend:**
+
+```bash
+npm install
+npm run dev
+```
+
+4. Open the app → type a stock → view **all dashboards**.
+
+---
+
+If you want, I can **also give a single, ready-to-run frontend folder** with all components prewired to your backend, so you just drop it in and it works.
+
+Do you want me to do that next?
+
+
+
+
+
+
+Perfect! Let’s summarize **Days 41–50 (Forecasting Models)** fully, with **all the working code, explanation, and workflow** from start to finish, so you have a clear roadmap. I’ll break it down step by step, beginner-friendly, and show where everything is saved.
+
+---
+
+# 🔹 **PHASE 5: FORECASTING MODELS (Day 41–50)**
+
+We are building **predictive models** for stock prices:
+
+* **Day 41–45** → **XGBoost Regression**
+* **Day 46–50** → **LSTM (Recurrent Neural Network)**
+
+Goal: Predict **next-day closing prices** for stocks.
+
+---
+
+## ✅ **Day 41–45: XGBoost Regression**
+
+**Objective:** Train a tree-based model (XGBoost) using **lag features** and **rolling averages**.
+
+### 1️⃣ Features
+
+We use:
+
+1. **Lag features:** Previous 1, 2, 3 days of closing prices
+   `Close_lag1, Close_lag2, Close_lag3`
+2. **Rolling averages:** 3-day and 7-day moving averages
+   `MA3, MA7`
+
+### 2️⃣ Code: `forecasting_xgb.py`
+
+```python
+import pandas as pd
+import xgboost as xgb
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+import joblib  # Save model
+
+def train_xgb(stock_csv_path="app/data/all_stock_prices.csv"):
+    """
+    Train XGBoost regression to predict next-day closing price.
+    """
+    print(f"✅ Loading CSV: {stock_csv_path}")
+    df = pd.read_csv(stock_csv_path, parse_dates=["Date"])
+    df = df.sort_values("Date")
+    
+    # Lag features
+    for lag in range(1, 4):
+        df[f"Close_lag{lag}"] = df["Close"].shift(lag)
+
+    # Rolling averages
+    df["MA3"] = df["Close"].rolling(3).mean()
+    df["MA7"] = df["Close"].rolling(7).mean()
+
+    # Drop NaN
+    df = df.dropna()
+
+    # Features & target
+    feature_cols = ["Close_lag1", "Close_lag2", "Close_lag3", "MA3", "MA7"]
+    X = df[feature_cols]
+    y = df["Close"]
+
+    # Train/test split (80%/20%)
+    split_index = int(0.8 * len(X))
+    X_train, X_test = X[:split_index], X[split_index:]
+    y_train, y_test = y[:split_index], y[split_index:]
+
+    # Train XGBoost
+    model = xgb.XGBRegressor(n_estimators=200, max_depth=5, learning_rate=0.1)
+    model.fit(X_train, y_train)
+    print("✅ XGBoost model trained!")
+
+    # Predictions
+    y_pred = model.predict(X_test)
+
+    # Metrics
+    rmse = mean_squared_error(y_test, y_pred)**0.5
+    mae = mean_absolute_error(y_test, y_pred)
+    print(f"XGBoost RMSE: {rmse:.2f}, MAE: {mae:.2f}")
+
+    # Save model
+    joblib.dump(model, "app/services/models/xgb_model.pkl")
+    print("✅ XGBoost model saved!")
+
+    return model, X_test, y_test, y_pred
+
+if __name__ == "__main__":
+    train_xgb()
+```
+
+---
+
+### 3️⃣ How to run
+
+```bash
+cd backend
+python app/services/forecasting_xgb.py
+```
+
+✅ You will see:
+
+* Loading CSV
+* Rows count
+* Training/testing split
+* RMSE/MAE metrics
+* Model saved at:
+  `app/services/models/xgb_model.pkl`
+
+---
+
+## ✅ **Day 46–50: LSTM Model**
+
+**Objective:** Use **sequence modeling** to capture trends and patterns in stock prices.
+
+* **LSTM (Long Short-Term Memory)** is a type of recurrent neural network for time series.
+* Input: sequences of `timesteps` days of **closing prices**.
+* Output: next-day closing price.
+
+### 1️⃣ Features
+
+* Only **Close price**.
+* Normalize prices using **MinMaxScaler** (0–1 scale).
+* Create **sliding windows** of `timesteps=30` (previous 30 days).
+
+### 2️⃣ Code: `forecasting_lstm.py`
+
+```python
+import pandas as pd
+import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense
+from sklearn.preprocessing import MinMaxScaler
+import joblib
+
+def train_lstm(stock_csv_path="app/data/all_stock_prices.csv", timesteps=30):
+    """
+    Train LSTM to predict next-day closing price.
+    """
+    df = pd.read_csv(stock_csv_path, parse_dates=["Date"])
+    df = df.sort_values("Date")
+
+    # Only Close prices
+    close_prices = df["Close"].values.reshape(-1, 1)
+
+    # Normalize
+    scaler = MinMaxScaler()
+    close_scaled = scaler.fit_transform(close_prices)
+
+    # Create sequences
+    X, y = [], []
+    for i in range(timesteps, len(close_scaled)):
+        X.append(close_scaled[i-timesteps:i, 0])
+        y.append(close_scaled[i, 0])
+    X, y = np.array(X), np.array(y)
+    X = X.reshape(X.shape[0], X.shape[1], 1)  # [samples, timesteps, features]
+
+    # Train/test split
+    split = int(0.8 * len(X))
+    X_train, X_test = X[:split], X[split:]
+    y_train, y_test = y[:split], y[split:]
+
+    # Build LSTM
+    model = Sequential()
+    model.add(LSTM(50, input_shape=(X_train.shape[1], 1)))
+    model.add(Dense(1))
+    model.compile(optimizer="adam", loss="mse")
+
+    # Train
+    model.fit(X_train, y_train, epochs=50, batch_size=32, verbose=1)
+
+    # Save model and scaler
+    model.save("app/services/lstm_model.h5")
+    joblib.dump(scaler, "app/services/models/lstm_scaler.pkl")
+    print("✅ LSTM model and scaler saved!")
+
+    return model, X_test, y_test
+
+if __name__ == "__main__":
+    train_lstm()
+```
+
+---
+
+### 3️⃣ How to run
+
+```bash
+cd backend
+python app/services/forecasting_lstm.py
+```
+
+✅ You will see:
+
+* Training logs for LSTM epochs
+* Model saved at:
+  `app/services/lstm_model.h5`
+  Scaler saved at:
+  `app/services/models/lstm_scaler.pkl`
+
+---
+
+## ✅ **Summary of Files Saved**
+
+| File                                  | Purpose               |
+| ------------------------------------- | --------------------- |
+| `app/services/models/xgb_model.pkl`   | XGBoost trained model |
+| `app/services/lstm_model.h5`          | LSTM trained model    |
+| `app/services/models/lstm_scaler.pkl` | Scaler for LSTM input |
+
+---
+
+## ✅ **How it Works in Frontend**
+
+1. You load a stock symbol in the app.
+2. Fetch historical prices from backend (`/history/{symbol}`).
+3. XGBoost and LSTM predict next-day price.
+4. Frontend visualizes predictions in `ForecastDashboard`.
+
+---
+
+If you want, I can also **give the final `ForecastDashboard.jsx`** connected with these two models so **your frontend works end-to-end** for Days 41–50.
+
+Do you want me to do that next?
+
+
+
+

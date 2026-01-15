@@ -1,0 +1,462 @@
+Perfect.
+I’ll now do **Day 1 in *extreme beginner-friendly depth*** — assume **ZERO prior finance or ML intuition**, but I will still make you *think like a real practitioner*.
+
+This day is **purely conceptual**, and it is **the most important day of the entire project**.
+If Day 1 is wrong, everything after becomes fake.
+
+---
+
+# 🟢 DAY 1 (4 HOURS)
+
+## “How Stock Prices Are Actually Predicted”
+
+### (Beginner → Real-World Mental Model)
+
+---
+
+# ⏱️ TIME BREAKDOWN
+
+| Time      | What you do                           |
+| --------- | ------------------------------------- |
+| 0:00–0:45 | What a stock price really is          |
+| 0:45–1:30 | What “prediction” actually means      |
+| 1:30–2:15 | Why LLM ≠ predictor                   |
+| 2:15–3:15 | Time series basics (slow & intuitive) |
+| 3:15–4:00 | Overfitting & lookahead bias          |
+
+---
+
+# 🔹 PART 1 (0:00–0:45)
+
+## What Is a Stock Price — REALLY?
+
+### ❌ Beginner misconception
+
+> “Stock price is a number that AI can predict like weather.”
+
+### ✅ Reality
+
+A stock price is:
+
+> **The last price at which ONE buyer and ONE seller agreed to trade.**
+
+That’s it.
+No “true value” exists.
+
+---
+
+### Example (Very Important)
+
+Imagine:
+
+* You want to sell Reliance at ₹2500
+* I want to buy at ₹2498
+
+No trade happens.
+
+Now a third person buys at ₹2500 →
+**₹2500 becomes the “market price”**
+
+➡ That number **does NOT represent the company**
+➡ It represents **human behavior at that moment**
+
+---
+
+### Key Insight #1 (Write this down)
+
+> **Stock prices are not physical measurements.
+> They are human decisions.**
+
+This single sentence explains why prediction is hard.
+
+---
+
+### Why prices move
+
+Prices move because of:
+
+* Fear
+* Greed
+* News
+* Expectations
+* Algorithms reacting to other algorithms
+
+---
+
+### 🎯 Mental model
+
+Stock prediction is **not math → answer**
+It is **pattern → probability**
+
+---
+
+# 🔹 PART 2 (0:45–1:30)
+
+## What Does “Prediction” Mean in Finance?
+
+### ❌ Wrong meaning
+
+> “Exact price on exact future date”
+
+That is **impossible**.
+
+---
+
+### ✅ Correct meaning
+
+In finance, prediction means:
+
+> “Given past patterns,
+> what is the **most likely range & direction**?”
+
+---
+
+### Example
+
+Instead of:
+
+> “TCS will be ₹4123 on 1 Jan 2026”
+
+Real prediction is:
+
+> “There is a 65% chance TCS will trend upward over the next 12 months, with expected monthly fluctuations.”
+
+---
+
+### Think like a casino 🎰
+
+Casinos don’t predict:
+
+> “This person will lose ₹500”
+
+They know:
+
+> “Over 10,000 people, we win.”
+
+---
+
+### Key Insight #2
+
+> **Good models don’t predict outcomes.
+> They predict distributions.**
+
+---
+
+### What your project will do
+
+Your system will:
+
+* Estimate **trend**
+* Estimate **volatility**
+* Generate **scenarios**
+* Make a **decision recommendation**
+
+---
+
+# 🔹 PART 3 (1:30–2:15)
+
+## Why LLM ≠ Stock Predictor (VERY IMPORTANT)
+
+### What is an LLM actually trained on?
+
+LLMs learn:
+
+* Language patterns
+* Sentence structures
+* Statistical relationships between words
+
+They **do NOT learn market dynamics**.
+
+---
+
+### Simple analogy
+
+LLM is like:
+
+> A person who has read every finance book
+> but has **never traded a single stock**
+
+---
+
+### Try this thought experiment
+
+Ask an LLM:
+
+> “What will Reliance stock be next month?”
+
+It can:
+
+* Sound confident
+* Use financial words
+* Create convincing explanations
+
+But:
+
+* It has **no access to future data**
+* It cannot model supply/demand
+* It does not know market microstructure
+
+---
+
+### Why LLMs hallucinate in finance
+
+LLMs optimize for:
+
+> “Most likely next word”
+
+NOT:
+
+> “Correct market behavior”
+
+---
+
+### Key Insight #3
+
+> **LLMs explain decisions.
+> They should never make them.**
+
+---
+
+### Your project architecture consequence
+
+LLM role =
+✔ Explanation
+✔ Summarization
+✔ Human-readable insights
+
+NOT:
+❌ Forecasting
+❌ Signal generation
+
+---
+
+# 🔹 PART 4 (2:15–3:15)
+
+## Time Series Basics (EXPLAINED SLOWLY)
+
+---
+
+### What is a time series?
+
+A **time series** is:
+
+> Data ordered by time.
+
+Example:
+
+```
+Date        Price
+Jan 1       100
+Jan 2       102
+Jan 3        98
+```
+
+---
+
+### Why stock data is special
+
+Stock time series is:
+
+* No fixed pattern
+* No repeating cycle
+* Influenced by external events
+
+This makes it **non-stationary**.
+
+---
+
+### Stationary vs Non-stationary (Simple)
+
+Stationary:
+
+* Mean stays similar
+* Variance stays similar
+
+Non-stationary:
+
+* Mean changes
+* Volatility changes
+
+Stocks = **NON-stationary**
+
+---
+
+### Why this matters
+
+Most ML models assume:
+
+> “Tomorrow behaves like yesterday”
+
+Stock markets often break that assumption.
+
+---
+
+### Trend vs Noise
+
+Price =
+
+```
+Trend + Noise
+```
+
+Your models try to:
+
+* Learn **trend**
+* Ignore **noise**
+
+---
+
+### Why multiple models are needed
+
+* ARIMA → local patterns
+* Prophet → long-term trend
+* LSTM → memory
+* XGBoost → nonlinear relations
+
+No single model works everywhere.
+
+---
+
+### Key Insight #4
+
+> **Stock prediction is model orchestration, not model choice.**
+
+---
+
+# 🔹 PART 5 (3:15–4:00)
+
+## Overfitting & Lookahead Bias (THE KILLERS)
+
+---
+
+## 🔥 Overfitting (Beginner explanation)
+
+Overfitting =
+
+> Model memorizes the past instead of learning patterns.
+
+---
+
+### Example
+
+You train on:
+
+```
+100 → 102 → 101 → 103
+```
+
+Model learns:
+
+> “Always increase by 2”
+
+Works on training data.
+Fails in real life.
+
+---
+
+### Visual intuition
+
+Overfit model:
+
+* Perfect past
+* Terrible future
+
+---
+
+### Why overfitting is common in stocks
+
+* Too little data
+* Too many indicators
+* Noise mistaken as signal
+
+---
+
+## 🔥 Lookahead Bias (EVEN WORSE)
+
+### What it is
+
+Using **future information** accidentally.
+
+---
+
+### Example (very common mistake)
+
+You train a model using:
+
+* 2025 data
+* To predict 2024 decisions
+
+This is **cheating**.
+
+---
+
+### Real-world analogy
+
+It’s like:
+
+> Taking tomorrow’s newspaper
+> and pretending you didn’t read it
+
+---
+
+### How your project avoids it
+
+* Freeze data at **31-12-2025**
+* No future prices allowed
+* No recalculation using future values
+
+---
+
+### Key Insight #5 (MOST IMPORTANT)
+
+> **A wrong but honest model
+> is better than a perfect but cheating one.**
+
+---
+
+# 🧠 FINAL DAY-1 MENTAL MODEL (WRITE THIS)
+
+> “Stock prices are human behavior over time.
+> No model predicts them exactly.
+> Good systems estimate probabilities,
+> use multiple models,
+> avoid cheating,
+> and explain decisions clearly.”
+
+---
+
+# ✅ DAY 1 DELIVERABLES
+
+You must create:
+
+```
+docs/
+ └── day1_mental_model.md
+```
+
+Inside it:
+
+1. Why stock prices are hard
+2. Why LLM ≠ predictor
+3. What prediction means
+4. What mistakes to avoid
+
+---
+
+# 🔜 DAY 2 PREVIEW
+
+Tomorrow you will:
+
+* Touch **real NSE + BSE data**
+* See how messy it is
+* Understand why cleaning matters more than models
+
+---
+
+If you want, next I can:
+
+* Do **Day 2 in same depth**
+* Give **Day 1 quiz questions**
+* Convert Day 1 into **interview answers**
+
+Just say which.

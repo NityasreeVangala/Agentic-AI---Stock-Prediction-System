@@ -1,0 +1,337 @@
+Alright! Let’s carefully go **step by step from Day 8 → Day 10** in **extreme detail**, exactly as we implemented for your Agentic Stock AI project. I’ll explain it as if teaching a beginner, including **all files, code changes, and reasoning**.
+
+---
+
+## **Day 8: Frontend Search Box & Stock Autocomplete**
+
+### Goal:
+
+Allow the user to **search stocks like Google**. When typing a company name, a dropdown appears with matching stocks. Once selected, the stock is passed to the system for further analysis.
+
+---
+
+### **Steps Taken:**
+
+1. **Created `SearchBox.jsx` in frontend:**
+
+```jsx
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+// Debounce helper: prevents API from being called on every keystroke
+function debounce(func, delay) {
+  let timeout;
+  return function (...args) {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}
+
+const SearchBox = ({ onSelectStock }) => {
+  const [query, setQuery] = useState("");       // What user types
+  const [results, setResults] = useState([]);   // API search results
+  const [loading, setLoading] = useState(false);
+
+  // Fetch search results from backend
+  const fetchResults = async (q) => {
+    if (!q) return setResults([]);
+    setLoading(true);
+    try {
+      const res = await axios.get(`http://127.0.0.1:8000/search?q=${q}`);
+      setResults(res.data.results);
+    } catch (err) {
+      console.error("API error:", err);
+    }
+    setLoading(false);
+  };
+
+  // Debounced fetch (wait 300ms after user stops typing)
+  const debouncedFetch = debounce(fetchResults, 300);
+
+  useEffect(() => {
+    debouncedFetch(query);
+  }, [query]);
+
+  return (
+    <div className="relative w-80">
+      <input
+        type="text"
+        className="w-full border p-2 rounded"
+        placeholder="Search stock..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+      {loading && <div className="absolute right-2 top-2 text-gray-500">Loading...</div>}
+      {results.length > 0 && (
+        <ul className="absolute w-full border mt-1 bg-white shadow rounded z-10 max-h-40 overflow-y-auto">
+          {results.map((stock) => (
+            <li
+              key={stock}
+              className="p-2 hover:bg-gray-200 cursor-pointer"
+              onClick={() => {
+                onSelectStock(stock);
+                setQuery(stock);
+                setResults([]);
+              }}
+            >
+              {stock}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default SearchBox;
+```
+
+✅ **What this does:**
+
+* Takes user input.
+* Debounces input (to reduce API calls).
+* Calls `/search?q=` endpoint from backend.
+* Shows results in a dropdown.
+* Lets user select a stock and notifies parent component.
+
+---
+
+### Backend Endpoint:
+
+```python
+# backend/app/main.py
+
+@app.get("/search")
+def autocomplete(q: str = Query(..., min_length=1, max_length=10)):
+    results = search_stocks(q)  # fetch matching stocks from list
+    return {"query": q, "results": results}
+```
+
+* `search_stocks(q)` is a **simple Python function** that filters stock symbols or company names based on the query.
+
+---
+
+### ✅ Outcome Day 8:
+
+* Search box works.
+* Dropdown shows autocomplete options.
+* Selected stock is passed to parent for further use (like plotting charts).
+
+---
+
+## **Day 9: Candlestick Chart for Stocks**
+
+### Goal:
+
+Display **stock price history visually** as a candlestick chart for selected stock.
+
+---
+
+### **Steps Taken:**
+
+1. **Created `CandlestickChart.jsx` in frontend:**
+
+```jsx
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  ResponsiveContainer,
+  ComposedChart,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Bar,
+} from "recharts";
+
+const CandlestickChart = ({ symbol }) => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    if (!symbol) return;
+    const fetchHistory = async () => {
+      try {
+        const res = await axios.get(`http://127.0.0.1:8000/history/${symbol}`);
+        setData(res.data.history);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchHistory();
+  }, [symbol]);
+
+  if (!data.length) return <p>Loading chart...</p>;
+
+  // Transform data for candlestick-like bar
+  const chartData = data.map((d) => ({
+    date: new Date(d.Date).toLocaleDateString(),
+    open: d.Open,
+    close: d.Close,
+    color: d.Close > d.Open ? "#4caf50" : "#f44336", // green/red
+  }));
+
+  return (
+    <ResponsiveContainer width="100%" height={400}>
+      <ComposedChart data={chartData}>
+        <XAxis dataKey="date" hide />
+        <YAxis domain={["dataMin", "dataMax"]} />
+        <Tooltip />
+        {chartData.map((d, i) => (
+          <Bar key={i} dataKey="close" fill={d.color} barSize={4} />
+        ))}
+      </ComposedChart>
+    </ResponsiveContainer>
+  );
+};
+
+export default CandlestickChart;
+```
+
+---
+
+### Backend Endpoint:
+
+```python
+@app.get("/history/{symbol}")
+def stock_history(symbol: str):
+    from app.services.data_fetcher import get_stock_history
+    return {"symbol": symbol, "history": get_stock_history(symbol)}
+```
+
+* `get_stock_history(symbol)` loads the **historical stock CSV** and returns data in JSON format.
+
+---
+
+### ✅ Outcome Day 9:
+
+* User can select a stock → chart appears.
+* Candlestick-like visualization shows **up/down movement** in colors.
+
+---
+
+## **Day 10: Snapshot Logic (Freeze Prices on 31-12-2025)**
+
+### Goal:
+
+Create a **time-safe system**:
+
+* Freeze last known prices for all 5 stocks on **31-12-2025**.
+* Users can retrieve **snapshot data** via `/snapshot` endpoint.
+
+---
+
+### **Steps Taken:**
+
+1. **Merged all 5 stocks into one CSV:**
+
+`merge_stocks.py`
+
+```python
+import pandas as pd
+import glob
+
+# Load all 5 stock CSVs
+files = glob.glob("app/data/stocks/*.csv")
+dfs = []
+
+for f in files:
+    df = pd.read_csv(f)
+    df["Symbol"] = f.split("\\")[-1].replace(".csv","")  # add symbol column
+    dfs.append(df)
+
+# Combine into single CSV
+all_df = pd.concat(dfs, ignore_index=True)
+all_df.to_csv("app/data/all_stock_prices.csv", index=False)
+print("✅ Combined CSV created!")
+print("Shape:", all_df.shape)
+```
+
+* Now we have `all_stock_prices.csv` with **columns: Date, Open, High, Low, Close, Volume, Symbol**.
+
+---
+
+2. **Created snapshot service `snapshot.py`:**
+
+```python
+import pandas as pd
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+ALL_DATA_PATH = BASE_DIR / "../data/all_stock_prices.csv"
+
+def generate_snapshot(date: str = "2025-12-31") -> pd.DataFrame:
+    if not ALL_DATA_PATH.exists():
+        raise FileNotFoundError(f"CSV not found at {ALL_DATA_PATH}")
+
+    df = pd.read_csv(ALL_DATA_PATH, parse_dates=["Date"])
+    snapshot_df = df[df["Date"] == date].copy()
+
+    if snapshot_df.empty:
+        raise ValueError(f"No data for {date}")
+
+    snapshot_df = snapshot_df[["Date","Open","High","Low","Close","Volume","Symbol"]]
+    return snapshot_df
+```
+
+---
+
+3. **Endpoint in `main.py`:**
+
+```python
+@app.get("/snapshot")
+def get_snapshot(date: str = "2025-12-31"):
+    df = snapshot_service.generate_snapshot(date)
+    data = df.to_dict(orient="records")
+    return {"snapshot_date": date, "data": data}
+```
+
+✅ **Outcome:**
+
+* `/snapshot` endpoint now returns **last known prices for all 5 stocks**.
+* Works with merged CSV.
+* Time-safe: even if historical data changes, snapshot remains fixed at `2025-12-31`.
+
+---
+
+### **File Structure After Day 10**
+
+```
+agentic-stock-ai-11/
+├─ backend/
+│  ├─ app/
+│  │  ├─ main.py
+│  │  ├─ services/
+│  │  │  ├─ search_service.py
+│  │  │  ├─ data_fetcher.py
+│  │  │  └─ snapshot.py
+│  │  └─ data/
+│  │     ├─ all_stock_prices.csv
+│  │     └─ stocks/  # individual CSVs of 5 stocks
+│  ├─ merge_stocks.py
+├─ frontend/
+│  ├─ src/
+│  │  ├─ components/
+│  │  │  ├─ SearchBox.jsx
+│  │  │  └─ CandlestickChart.jsx
+│  │  └─ App.jsx
+│  └─ package.json
+```
+
+---
+
+### **Key Learnings from Day 8-10**
+
+1. **Day 8:** Search box with autocomplete → connects frontend → backend.
+2. **Day 9:** Candlestick chart → visualizes stock history.
+3. **Day 10:** Snapshot logic → merges 5 stocks → freezes prices → `/snapshot` endpoint.
+4. **Data handling:** Always use **merged CSV** for multiple stocks to simplify snapshot & charting.
+
+---
+
+If you want, I can now make a **fully ready-to-run backend + frontend setup**, where:
+
+* You fetch all 5 stocks,
+* Merge them,
+* View history charts,
+* Get snapshot, **all working without errors**.
+
+Do you want me to do that next?

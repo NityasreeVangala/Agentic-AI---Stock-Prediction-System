@@ -1,0 +1,204 @@
+Absolutely! Let’s break **Day 11** into **extreme beginner-friendly detail**, step by step. The goal today is to understand **fundamental stock metrics**, what they mean, how they’re calculated, and why they matter.
+
+---
+
+# **Day 11 – Learning Fundamental Metrics (Beginner Friendly)**
+
+### **Goal:**
+
+Understand **key financial metrics** that investors use to evaluate a stock:
+
+1. **PE Ratio (Price-to-Earnings)**
+2. **EPS (Earnings Per Share)**
+3. **ROE (Return on Equity)**
+4. **Debt / Leverage**
+
+These metrics tell you **how profitable, efficient, and risky a company is**.
+
+---
+
+## **1️⃣ PE Ratio (Price-to-Earnings)**
+
+### **What it is:**
+
+* Shows **how much investors are willing to pay for $1 of earnings**.
+* Compares **stock price** to **company earnings**.
+* Formula:
+
+[
+\text{PE Ratio} = \frac{\text{Price per Share}}{\text{Earnings per Share (EPS)}}
+]
+
+---
+
+### **Example:**
+
+* Stock price = ₹200
+* EPS = ₹10
+
+[
+\text{PE Ratio} = \frac{200}{10} = 20
+]
+
+✅ Interpretation:
+
+* Investors pay **20 times the earnings** for this stock.
+* High PE → stock might be **expensive** (or growth expected)
+* Low PE → stock might be **cheap** (or company struggling)
+
+---
+
+### **Python Example:**
+
+```python
+price = 200
+eps = 10
+pe_ratio = price / eps
+print("PE Ratio:", pe_ratio)  # Output: 20
+```
+
+---
+
+## **2️⃣ EPS (Earnings Per Share)**
+
+### **What it is:**
+
+* Measures **profitability per share**.
+* Formula:
+
+[
+\text{EPS} = \frac{\text{Net Income} - \text{Dividends on Preferred Stock}}{\text{Number of Outstanding Shares}}
+]
+
+---
+
+### **Example:**
+
+* Net income = ₹50,00,000
+* Outstanding shares = 5,00,000
+
+[
+\text{EPS} = \frac{50,00,000}{5,00,000} = 10
+]
+
+✅ Interpretation:
+
+* Each share earned ₹10 profit in the last year.
+* Higher EPS → company is more **profitable**.
+
+---
+
+### **Python Example:**
+
+```python
+net_income = 5000000
+outstanding_shares = 500000
+eps = net_income / outstanding_shares
+print("EPS:", eps)  # Output: 10
+```
+
+---
+
+## **3️⃣ ROE (Return on Equity)**
+
+### **What it is:**
+
+* Measures **how efficiently a company uses shareholders’ money** to generate profit.
+* Formula:
+
+[
+\text{ROE} = \frac{\text{Net Income}}{\text{Shareholder's Equity}} \times 100
+]
+
+---
+
+### **Example:**
+
+* Net income = ₹50,00,000
+* Shareholder equity = ₹2,50,00,000
+
+[
+\text{ROE} = \frac{50,00,000}{2,50,00,000} \times 100 = 20%
+]
+
+✅ Interpretation:
+
+* Company generates **20% profit for every ₹1 of equity**.
+* Higher ROE → company is using money **efficiently**.
+
+---
+
+### **Python Example:**
+
+```python
+net_income = 5000000
+equity = 25000000
+roe = (net_income / equity) * 100
+print("ROE:", roe, "%")  # Output: 20%
+```
+
+---
+
+## **4️⃣ Debt / Leverage**
+
+### **What it is:**
+
+* Shows how **much debt a company has compared to its equity**.
+* Formula (Debt-to-Equity Ratio):
+
+[
+\text{Debt-to-Equity} = \frac{\text{Total Debt}}{\text{Shareholder's Equity}}
+]
+
+---
+
+### **Example:**
+
+* Total debt = ₹1,00,00,000
+* Equity = ₹2,50,00,000
+
+[
+\text{Debt-to-Equity} = \frac{1,00,00,000}{2,50,00,000} = 0.4
+]
+
+✅ Interpretation:
+
+* For every ₹1 of equity, company has ₹0.4 of debt.
+* Lower ratio → safer, less risky.
+* Higher ratio → more leveraged → higher risk.
+
+---
+
+### **Python Example:**
+
+```python
+total_debt = 10000000
+equity = 25000000
+de_ratio = total_debt / equity
+print("Debt-to-Equity:", de_ratio)  # Output: 0.4
+```
+
+---
+
+## **Summary of Day 11 Metrics**
+
+| Metric          | Formula             | What it tells you                     |
+| --------------- | ------------------- | ------------------------------------- |
+| **PE**          | Price ÷ EPS         | How expensive a stock is              |
+| **EPS**         | Net Income ÷ Shares | Profit per share                      |
+| **ROE**         | Net Income ÷ Equity | Efficiency of using shareholder money |
+| **Debt/Equity** | Total Debt ÷ Equity | Financial risk / leverage             |
+
+---
+
+### **Why This Is Important for Your Stock AI**
+
+1. **PE + EPS** → help your agent suggest if stock is **cheap/expensive**.
+2. **ROE** → helps understand **company quality**.
+3. **Debt** → tells the **risk level** of investing.
+
+---
+
+If you want, I can **also show how to code this for your 5 stocks**, so your **Agentic Stock AI can calculate PE, EPS, ROE, Debt automatically** for each stock and **add it to your dashboard**.
+
+Do you want me to do that next?

@@ -1,0 +1,181 @@
+Perfect! Let’s dive into **Day 6** in extreme beginner-friendly detail.
+Today, we are building the **autocomplete search functionality** — exactly like Google when you type a company name in the stock search box.
+
+We’ll go **step by step**, assuming you know **basic Python and FastAPI** from Day 3.
+
+---
+
+# 🟦 DAY 6 — AUTOCOMPLETE SEARCH API (4 HOURS)
+
+## 🎯 Goal
+
+> “When a user starts typing a company name in the frontend, the backend should return a list of possible stock matches immediately, like Google search suggestions.”
+
+Example:
+
+```
+GET /search?q=rel
+Response: ["RELIANCE.NS", "RELIANCE INFRA.NS", ...]
+```
+
+---
+
+# 🕐 Step 1 — Understand the problem
+
+**We have:**
+
+* 5 CSVs (TCS, RELIANCE, HDFCBANK, YESBANK, INFY)
+* Each CSV contains **historical stock data**, but the **symbol is the key**
+* We want a **fast way to search symbols by prefix**
+
+---
+
+**Key concepts:**
+
+1. **Prefix matching:** Return all symbols starting with the query letters
+
+   * `q = "re"` → matches `RELIANCE.NS`
+2. **Case-insensitive:** Both `re` and `RE` should match
+3. **Autocomplete API:** Fast response for typing
+
+---
+
+# 🕑 Step 2 — Prepare the data
+
+We create a **simple list of all stock symbols**.
+
+File: `backend/app/services/search_service.py`
+
+```python
+# A simple in-memory list for autocomplete
+STOCK_SYMBOLS = ["TCS.NS", "RELIANCE.NS", "HDFCBANK.NS", "YESBANK.NS", "INFY.NS"]
+
+def search_stocks(query: str):
+    query = query.lower()
+    matches = [s for s in STOCK_SYMBOLS if s.lower().startswith(query)]
+    return matches
+```
+
+**Explanation for beginners:**
+
+* `STOCK_SYMBOLS` → list of all available stocks
+* `.lower()` → makes search **case-insensitive**
+* `startswith(query)` → only match symbols **starting with the typed letters**
+* Returns a **list of matching symbols**
+
+✅ This is extremely fast because we only have **5 items**.
+
+---
+
+# 🕒 Step 3 — Expose API endpoint with FastAPI
+
+File: `backend/app/main.py` (add this below your root `/` endpoint):
+
+```python
+from fastapi import FastAPI, Query
+from app.services.search_service import search_stocks
+
+app = FastAPI(title="Agentic Stock AI", version="0.1.0")
+
+# Existing root endpoint
+@app.get("/")
+def root():
+    return {"message": "Backend running"}
+
+# Autocomplete search endpoint
+@app.get("/search")
+def autocomplete(q: str = Query(..., min_length=1, max_length=10)):
+    """
+    Search for stock symbols by prefix.
+    Example: /search?q=rel
+    """
+    results = search_stocks(q)
+    return {"query": q, "results": results}
+```
+
+**Explanation for beginners:**
+
+* `q: str = Query(...)` → reads query parameter `q` from URL
+* `min_length=1` → prevents empty search
+* `max_length=10` → limits query length for efficiency
+* Calls `search_stocks(q)` → returns matches
+* Returns JSON:
+
+```json
+{
+  "query": "rel",
+  "results": ["RELIANCE.NS"]
+}
+```
+
+---
+
+# 🕓 Step 4 — Test your API
+
+1. Start backend:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+2. Open browser or Postman:
+
+```
+http://127.0.0.1:8000/search?q=rel
+```
+
+Response:
+
+```json
+{
+  "query": "rel",
+  "results": ["RELIANCE.NS"]
+}
+```
+
+3. Try `q=T`:
+
+```json
+{
+  "query": "T",
+  "results": ["TCS.NS"]
+}
+```
+
+✅ Works exactly like Google search suggestions
+
+---
+
+# 🧠 Step 5 — Optional Enhancements (for later)
+
+* Return **company names** along with symbols
+* Limit to **top 5 matches** if the list grows
+* Cache popular queries for **even faster response**
+* Add **fuzzy matching** (matches substrings, not just prefixes)
+
+---
+
+# 🟩 Day 6 Output
+
+* **File created:** `backend/app/services/search_service.py`
+* **Main API updated:** `backend/app/main.py`
+* **Endpoint:** `/search?q=<query>`
+* **Behavior:** Autocomplete / prefix search, fast & simple
+
+---
+
+# ✅ Summary of Day 6
+
+| Task                              | Status |
+| --------------------------------- | ------ |
+| Understand prefix matching        | ✅      |
+| Build `search_stocks()` function  | ✅      |
+| Create `/search` FastAPI endpoint | ✅      |
+| Test API on 5 stock symbols       | ✅      |
+| Ready for frontend integration    | ✅      |
+
+---
+
+If you want, the **next step (Day 7)** will be **building technical indicators (RSI, MACD, EMA) using your CSV data**, which is the next core functionality for your stock agent.
+
+Do you want me to do **Day 7 next**?
