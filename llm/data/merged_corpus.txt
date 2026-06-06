@@ -1,0 +1,16 @@
+# merge_datasets.py
+import os
+
+data_folder = "../data/"
+merged_file = os.path.join(data_folder, "merged_corpus.txt")
+
+files_to_merge = ["wiki_small.txt", "financial_news.txt"]
+
+with open(merged_file, "w", encoding="utf-8") as outfile:
+    for fname in files_to_merge:
+        path = os.path.join(data_folder, fname)
+        with open(path, "r", encoding="utf-8") as infile:
+            text = infile.read()
+            outfile.write(text + "\n")
+
+print(f"Merged dataset saved as: {merged_file}")

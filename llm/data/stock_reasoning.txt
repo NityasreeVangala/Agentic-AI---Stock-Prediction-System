@@ -1,0 +1,2826 @@
+Input:
+PE=10, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=12, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=10, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: weak
+
+Input:
+PE=13, ROE=12, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=11, ROE=18, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=15, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=16, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=18, ROE=8, RSI=45
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=20, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=17, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=19, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=8, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=27, ROE=18, RSI=65
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=35, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=11, ROE=5, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=8, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=12, ROE=10, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=20, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=10, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=16, ROE=8, RSI=40
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=20, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=22, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=24, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=26, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=29, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=31, ROE=22, RSI=70
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=12, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=11, ROE=10, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=12, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=10, ROE=18, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=16, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=30
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=8, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=20, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=23, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=28, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=32, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=29, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=31, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=33, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+Input:
+PE=10, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=12, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=10, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: weak
+
+Input:
+PE=13, ROE=12, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=11, ROE=18, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=15, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=16, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=18, ROE=8, RSI=45
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=20, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=17, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=19, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=8, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=27, ROE=18, RSI=65
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=35, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=11, ROE=5, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=8, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=12, ROE=10, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=20, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=10, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=16, ROE=8, RSI=40
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=20, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=22, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=24, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=26, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=29, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=31, ROE=22, RSI=70
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=12, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=11, ROE=10, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=12, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=10, ROE=18, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=16, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=30
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=8, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=20, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=23, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=28, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=32, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=29, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=31, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=33, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+Input:
+PE=10, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=12, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=10, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: weak
+
+Input:
+PE=13, ROE=12, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=11, ROE=18, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=15, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=16, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=18, ROE=8, RSI=45
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=20, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=17, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=19, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=8, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=27, ROE=18, RSI=65
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=35, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=11, ROE=5, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=8, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=12, ROE=10, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=20, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=10, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=16, ROE=8, RSI=40
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=20, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=22, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=24, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=26, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=29, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=31, ROE=22, RSI=70
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=12, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=11, ROE=10, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=12, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=10, ROE=18, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=16, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=30
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=8, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=20, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=23, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=28, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=32, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=29, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=31, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=33, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+Input:
+PE=10, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=12, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=10, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: weak
+
+Input:
+PE=13, ROE=12, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=11, ROE=18, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=15, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=16, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=18, ROE=8, RSI=45
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=20, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=17, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=19, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=8, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=27, ROE=18, RSI=65
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=35, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=11, ROE=5, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=8, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=12, ROE=10, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=20, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=10, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=16, ROE=8, RSI=40
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=20, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=22, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=24, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=26, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=29, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=31, ROE=22, RSI=70
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=12, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=11, ROE=10, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=12, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=10, ROE=18, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=16, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=30
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=8, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=20, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=23, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=28, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=32, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=29, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=31, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=33, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+Input:
+PE=10, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=12, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=10, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: weak
+
+Input:
+PE=13, ROE=12, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=11, ROE=18, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=15, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=16, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=18, ROE=8, RSI=45
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=20, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=17, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=19, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=8, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=27, ROE=18, RSI=65
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=35, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=11, ROE=5, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=8, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=12, ROE=10, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=20, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=10, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=16, ROE=8, RSI=40
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=20, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=22, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=24, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=26, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=29, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=31, ROE=22, RSI=70
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=12, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=11, ROE=10, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=12, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=10, ROE=18, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=16, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=30
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=8, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=20, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=23, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=28, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=32, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=29, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=31, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=33, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+Input:
+PE=10, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=12, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=10, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: weak
+
+Input:
+PE=13, ROE=12, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=11, ROE=18, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=15, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=16, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=18, ROE=8, RSI=45
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=20, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=17, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=19, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=8, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=27, ROE=18, RSI=65
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=35, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=11, ROE=5, RSI=40
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=8, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: moderate
+
+Input:
+PE=12, ROE=10, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=20, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=10, ROE=22, RSI=65
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=16, ROE=8, RSI=40
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=20, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=22, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=24, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=26, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=28, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=32, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=29, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=31, ROE=22, RSI=70
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=12, ROE=5, RSI=30
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=14, ROE=7, RSI=35
+
+Output:
+Valuation: undervalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=11, ROE=10, RSI=45
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=13, ROE=12, RSI=50
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=15, ROE=15, RSI=55
+
+Output:
+Valuation: undervalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=10, ROE=18, RSI=60
+
+Output:
+Valuation: undervalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=16, ROE=22, RSI=65
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=18, ROE=5, RSI=30
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=19, ROE=8, RSI=35
+
+Output:
+Valuation: fair
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=20, ROE=10, RSI=45
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=22, ROE=12, RSI=50
+
+Output:
+Valuation: fair
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=21, ROE=15, RSI=55
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=23, ROE=18, RSI=60
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=25, ROE=22, RSI=70
+
+Output:
+Valuation: fair
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=28, ROE=5, RSI=30
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=30, ROE=7, RSI=35
+
+Output:
+Valuation: overvalued
+Profitability: weak
+Momentum: weak
+
+Input:
+PE=32, ROE=10, RSI=45
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=27, ROE=12, RSI=50
+
+Output:
+Valuation: overvalued
+Profitability: moderate
+Momentum: moderate
+
+Input:
+PE=29, ROE=15, RSI=55
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: moderate
+
+Input:
+PE=31, ROE=18, RSI=60
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
+
+Input:
+PE=33, ROE=22, RSI=75
+
+Output:
+Valuation: overvalued
+Profitability: strong
+Momentum: strong
